@@ -28,13 +28,21 @@ export default function Home() {
         <Text>{TEXT}</Text>
       </h1>
 
-      <div className="flex flex-col gap-1.5">
-        <h2 className="text-base border-b border-white">Work Experience</h2>
+      <div className="flex flex-col gap-1.5 max-w-screen-sm w-full">
+        <h2 className="text-xs border-b border-white">
+          <Text>Work Experience</Text>
+        </h2>
 
         <div className="text-base">
-          <h3>Whitney Museum of American Art</h3>
-          <h3>Chatlands Horizons</h3>
-          <h3>The Markup</h3>
+          <h3>
+            <Text>Whitney Museum of American Art</Text>
+          </h3>
+          <h3>
+            <Text>Chatlands Horizons</Text>
+          </h3>
+          <h3>
+            <Text>The Markup</Text>
+          </h3>
         </div>
       </div>
     </main>
