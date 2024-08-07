@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const CLASSES = ["one", "two"];
+const CLASSES = ["roboto", "sankofa"];
 
 const getRandomClass = () => {
   return CLASSES[Math.floor(Math.random() * CLASSES.length)];
