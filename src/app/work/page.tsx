@@ -1,23 +1,8 @@
 import Text from "../text";
 
-const CLASSES = ["one", "two"];
 const TEXT = "Luke Underwood";
 
-const getRandomClass = () => {
-  return CLASSES[Math.floor(Math.random() * CLASSES.length)];
-};
-
-const styleize = (text: string) => {
-  return text.split("").map((c, idx) => {
-    return (
-      <span key={idx} className={getRandomClass()}>
-        {c}
-      </span>
-    );
-  });
-};
-
-export default function Home() {
+export default function Work() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-start gap-4 p-24">
       <h1 className="text-base">
