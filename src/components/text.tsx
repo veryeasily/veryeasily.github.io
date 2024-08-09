@@ -6,11 +6,30 @@ const CLASSES = ["roboto", "sankofa"];
 const CHARS = ["●", "★", "▲", "■", "▼", "◆", "○", "◇", "◎", "◉"];
 
 const getRandomClass = () => {
+  const classes = [];
   if (Math.random() > 0.2) {
-    return "roboto";
+    classes.push("roboto");
+  } else {
+    classes.push(CLASSES[Math.floor(Math.random() * CLASSES.length)]);
   }
 
-  return CLASSES[Math.floor(Math.random() * CLASSES.length)];
+  if (Math.random() < 1 / 10) {
+    classes.push("font-bold");
+  }
+
+  if (Math.random() < 1 / 40) {
+    classes.push("font-thin");
+  }
+
+  if (Math.random() < 1 / 20) {
+    classes.push("text-blue-500");
+  }
+
+  if (Math.random() < 1 / 20) {
+    classes.push("text-pink-500");
+  }
+
+  return classes.join(" ");
 };
 
 const styleize = (text: string) => {
