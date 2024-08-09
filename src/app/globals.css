@@ -15,15 +15,39 @@
 
 :root {
   --desktop-width: 960px;
+  --my-red: #ff6b6b;
+  --my-green: #c7f464;
+  --my-aqua: #4ecdc4;
+  --my-yellow: #ffff6f;
+  --my-white: rgb(253, 253, 253);
+  --my-black: rgb(26, 14, 0);
 
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
 
+@keyframes color-cycle {
+  0% {
+    background-color: var(--my-red);
+  }
+  25% {
+    background-color: var(--my-green);
+  }
+  50% {
+    background-color: var(--my-aqua);
+  }
+  75% {
+    background-color: var(--my-yellow);
+  }
+  100% {
+    background-color: var(--my-red);
+  }
+}
+
 body {
   color: rgb(var(--foreground-rgb));
-  background: theme("colors.teal.800");
+  animation: 8s infinite color-cycle;
 }
 
 @layer utilities {
