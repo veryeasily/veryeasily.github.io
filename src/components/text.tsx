@@ -33,7 +33,7 @@ const styleize = (text: string) => {
     }
 
     return (
-      <span key={idx} className={getRandomClass()}>
+      <span key={idx} className={getRandomClass()} suppressHydrationWarning>
         {str}
       </span>
     );
@@ -60,5 +60,5 @@ export default function Text({ children }: TextProps) {
     return () => cancelAnimationFrame(handle.current || 0);
   }, [cb]);
 
-  return <span>{content}</span>;
+  return <span suppressHydrationWarning>{content}</span>;
 }
