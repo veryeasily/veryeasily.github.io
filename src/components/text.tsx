@@ -14,15 +14,19 @@ const getRandomClass = () => {
 };
 
 const styleize = (text: string) => {
+  if (Math.random() > 9 / 10) {
+    text = text.split("").reverse().join("");
+  }
+
   return text.split("").map((c, idx) => {
     let str = c;
     const rand = Math.random();
     switch (true) {
-      case rand < 0.1: {
+      case rand < 1 / 10: {
         str = CHARS[Math.floor(Math.random() * CHARS.length)];
         break;
       }
-      case rand < 0.2: {
+      case rand < 2 / 10: {
         str = c.toUpperCase();
         break;
       }
@@ -40,16 +44,16 @@ interface TextProps {
   children: string;
 }
 
-export default function Text(props: TextProps) {
-  const [content, setContent] = useState(() => styleize(props.children));
+export default function Text({ children }: TextProps) {
+  const [content, setContent] = useState(() => styleize(children));
   const handle = useRef<number | null>(null);
 
   const cb = useCallback(() => {
-    if (Math.random() < 0.05) {
-      setContent(styleize(props.children));
+    if (Math.random() < 1 / 30) {
+      setContent(styleize(children));
     }
     handle.current = requestAnimationFrame(cb);
-  }, [props.children]);
+  }, [children]);
 
   useEffect(() => {
     handle.current = requestAnimationFrame(cb);
