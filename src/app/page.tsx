@@ -25,7 +25,10 @@ export default function Home() {
           </h3>
 
           <h3 className="text-xs">
-            <Link href="/music" className="text-lime-500 underline">
+            <Link
+              href="https://soundcloud.com/siiiiinging"
+              className="text-lime-500 underline"
+            >
               Music
             </Link>
           </h3>
