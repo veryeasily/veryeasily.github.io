@@ -5,26 +5,26 @@ const TEXT = "Luke Underwood";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-start gap-4 p-24">
-      <h1 className="text-base">
+    <main className="flex min-h-screen flex-col items-center justify-start gap-4 p-24 text-base">
+      <h1>
         <Link href="/" className="text-lime-500 underline">
           <Text>{TEXT}</Text>
         </Link>
       </h1>
 
-      <div className="flex w-full max-w-screen-sm flex-col gap-1.5">
-        <h2 className="mb-1 border-b border-white text-2xl">
+      <div className="flex w-full max-w-screen-sm flex-col">
+        <h2 className="mb-1 border-b border-white text-xs">
           <Text>Index</Text>
         </h2>
 
-        <div className="flex flex-col gap-1 text-base">
-          <h3 className="text-xs">
+        <div className="flex flex-col">
+          <h3>
             <Link href="/art" className="text-lime-500 underline">
               Art
             </Link>
           </h3>
 
-          <h3 className="text-xs">
+          <h3>
             <Link
               href="https://soundcloud.com/siiiiinging"
               className="text-lime-500 underline"
@@ -33,7 +33,7 @@ export default function Home() {
             </Link>
           </h3>
 
-          <h3 className="text-xs">
+          <h3>
             <Link href="/work" className="text-lime-500 underline">
               Work
             </Link>
