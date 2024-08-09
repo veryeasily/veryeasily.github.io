@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const CLASSES = ["roboto", "sankofa"];
-const CHARS = ["●", "★", "▲", "■", "▼", "◆", "○", "◇", "◎", "◉", "🎑"];
+const CHARS = ["●", "★", "▲", "■", "▼", "◆", "○", "◇", "◎", "◉"];
 
 const getRandomClass = () => {
   const classes = [];
