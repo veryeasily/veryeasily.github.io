@@ -7,6 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Luke Underwood",
   description: "Personal site of Luke Underwood",
+  robots: "noindex, nofollow",
 };
 
 export default function RootLayout({
