@@ -3,14 +3,30 @@
 import { useEffect, useState } from "react";
 
 const CLASSES = ["roboto", "sankofa"];
+const CHARS = ["●", "★", "▲", "■", "▼", "◆", "○", "◇", "◎", "◉"];
 
 const getRandomClass = () => {
+  if (Math.random() > 0.02) {
+    return "roboto";
+  }
+
   return CLASSES[Math.floor(Math.random() * CLASSES.length)];
 };
 
 const styleize = (text: string) => {
   return text.split("").map((c, idx) => {
-    const str = Math.random() < 0.05 ? "!" : c;
+    let str = c;
+    const rand = Math.random();
+    switch (true) {
+      case rand < 0.005: {
+        str = CHARS[Math.floor(Math.random() * CHARS.length)];
+        break;
+      }
+      case rand < 0.02: {
+        str = c.toUpperCase();
+        break;
+      }
+    }
 
     return (
       <span key={idx} className={getRandomClass()}>
