@@ -6,7 +6,7 @@ import Text from "@/components/text";
 export default function Home() {
   return (
     <BasePage>
-      <div className="text-black">
+      <div className="flex flex-col gap-4 text-black">
         <h2 className="text-2xl">hey!!</h2>
         <p className="text-lg">this is where i plan to put stuff i do!</p>
       </div>
