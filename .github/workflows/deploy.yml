@@ -27,7 +27,7 @@ jobs:
         run: pnpm install
 
       - name: Export the static site
-        run: pnpm export
+        run: pnpm build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
