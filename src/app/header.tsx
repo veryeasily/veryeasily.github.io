@@ -20,12 +20,7 @@ export default function Header() {
   return (
     <header className="flex justify-center gap-3 py-12">
       {LINKS.map(({ href, target, text }) => (
-        <Link
-          key={href}
-          target={target ? target : undefined}
-          href={href}
-          className="header-btn"
-        >
+        <Link key={href} target={target} href={href} className="header-btn">
           {text}
         </Link>
       ))}
