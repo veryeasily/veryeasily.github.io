@@ -10,9 +10,11 @@ const getRandomClass = () => {
 
 const styleize = (text: string) => {
   return text.split("").map((c, idx) => {
+    const str = Math.random() < 0.05 ? "!" : c;
+
     return (
       <span key={idx} className={getRandomClass()}>
-        {c}
+        {str}
       </span>
     );
   });
