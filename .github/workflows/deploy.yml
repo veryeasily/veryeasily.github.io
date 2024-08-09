@@ -45,6 +45,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Disable telemetry for next.js
+        run: pnpm exec next telemetry disable
+
       - name: Export the static site
         run: pnpm build
 
