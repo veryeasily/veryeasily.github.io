@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const CLASSES = ["roboto", "sankofa"];
 const CHARS = ["●", "★", "▲", "■", "▼", "◆", "○", "◇", "◎", "◉"];
@@ -42,14 +42,17 @@ interface TextProps {
 
 export default function Text(props: TextProps) {
   const [content, setContent] = useState(() => styleize(props.children));
+  const handle = useRef<number | null>(null);
+
+  const cb = useCallback(() => {
+    setContent(styleize(props.children));
+    handle.current = requestAnimationFrame(cb);
+  }, [props.children]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setContent(styleize(props.children));
-    }, 100);
-
-    return () => clearInterval(interval);
-  }, [props.children]);
+    handle.current = requestAnimationFrame(cb);
+    return () => cancelAnimationFrame(handle.current || 0);
+  }, [cb]);
 
   return <span>{content}</span>;
 }
