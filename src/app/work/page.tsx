@@ -5,7 +5,7 @@ const TEXT = "Luke Underwood";
 
 export default function Work() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-start gap-4 p-24 text-base">
+    <main className="flex min-h-screen flex-col items-center justify-start gap-1 p-24 text-base">
       <h1>
         <Link href="/" className="text-lime-500 underline">
           <Text>{TEXT}</Text>
