@@ -1,12 +1,15 @@
+"use client";
+
 import clsx from "clsx";
-import Image from "next/image";
 import * as React from "react";
 import { useEffect, useState } from "react";
 
-export default function Artwork({ src }) {
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-  const loaded = dimensions.width > 0 && dimensions.height > 0;
+export interface ArtworkProps {
+  src: string;
+}
 
+export default function Artwork({ src }: ArtworkProps) {
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [position, setPosition] = useState({
     x: 0,
     y: 0,
@@ -16,6 +19,17 @@ export default function Artwork({ src }) {
     rotateZ: 0,
     rotateDeg: 0,
   });
+  const loaded = dimensions.width > 0 && dimensions.height > 0;
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = src;
+    img.onload = (e: Event) => {
+      const img = e.target as HTMLImageElement;
+      console.log("loaded", img.naturalWidth, img.naturalHeight);
+      setDimensions({ width: img.naturalWidth, height: img.naturalHeight });
+    };
+  }, [src]);
 
   useEffect(() => {
     if (!loaded) return;
@@ -40,28 +54,18 @@ export default function Artwork({ src }) {
     return () => clearInterval(interval);
   }, [loaded]);
 
-  const style = loaded
-    ? {
+  return loaded ? (
+    <img
+      src={src}
+      alt="artwork"
+      className="absolute left-0 top-0 duration-500"
+      style={{
         transform: `
           translate3d(${position.x}px, ${position.y}px, ${position.z}px)
           rotate3d(${position.rotateX}, ${position.rotateY}, ${position.rotateZ}, ${position.rotateDeg}deg)
           scale(0.5)
         `,
-      }
-    : {};
-
-  const doLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    const img = e.target as HTMLImageElement;
-    setDimensions({ width: img.naturalWidth, height: img.naturalHeight });
-  };
-
-  return (
-    <Image
-      src={src}
-      alt="artwork"
-      className={clsx(["transition", loaded ? "block" : "hidden"])}
-      style={style}
-      onLoad={doLoad}
+      }}
     />
-  );
+  ) : null;
 }
