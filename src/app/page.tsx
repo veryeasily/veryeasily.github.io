@@ -28,6 +28,7 @@ export default function Home() {
             <Link
               href="https://soundcloud.com/siiiiinging"
               className="text-lime-500 underline"
+              target="_blank"
             >
               Music
             </Link>
