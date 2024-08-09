@@ -1,9 +1,6 @@
-import Link from "next/link.js";
-
 import BasePage from "@/components/base_page";
-import Text from "@/components/text";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <BasePage>
       <div className="flex flex-col gap-4 text-black">

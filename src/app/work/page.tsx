@@ -1,7 +1,7 @@
 import Text from "@/components/text";
 import BasePage from "@/components/base_page";
 
-export default function Work() {
+export default function WorkPage() {
   return (
     <BasePage>
       <h3>
