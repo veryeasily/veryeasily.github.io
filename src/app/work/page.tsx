@@ -3,7 +3,7 @@ import BasePage from "@/components/base_page";
 
 export default function Work() {
   return (
-    <BasePage header="Work Experience">
+    <BasePage>
       <h3>
         <Text>Whitney Museum of American Art</Text>
       </h3>

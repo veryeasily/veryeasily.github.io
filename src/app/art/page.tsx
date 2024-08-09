@@ -3,7 +3,7 @@ import Text from "@/components/text";
 
 export default function Home() {
   return (
-    <BasePage header="Art">
+    <BasePage>
       <h3>
         <Text>Put art here!</Text>
       </h3>
