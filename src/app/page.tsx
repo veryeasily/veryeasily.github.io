@@ -1,13 +1,14 @@
 import Link from "next/link.js";
 
 import BasePage from "@/components/base_page";
+import Text from "@/components/text";
 
 export default function Home() {
   return (
     <BasePage header="Index">
       <h3>
         <Link href="/art" className="text-lime-500 underline">
-          Art
+          <Text>Art</Text>
         </Link>
       </h3>
 
@@ -17,13 +18,13 @@ export default function Home() {
           className="text-lime-500 underline"
           target="_blank"
         >
-          Music
+          <Text>Music</Text>
         </Link>
       </h3>
 
       <h3>
         <Link href="/work" className="text-lime-500 underline">
-          Work
+          <Text>Work</Text>
         </Link>
       </h3>
     </BasePage>

@@ -45,10 +45,6 @@ const styleize = (text: string) => {
         str = CHARS[Math.floor(Math.random() * CHARS.length)];
         break;
       }
-      case rand < 2 / 10: {
-        str = c.toUpperCase();
-        break;
-      }
     }
 
     return (
@@ -68,7 +64,7 @@ export default function Text({ children }: TextProps) {
   const handle = useRef<number | null>(null);
 
   const cb = useCallback(() => {
-    if (Math.random() < 1 / 30) {
+    if (Math.random() < 1 / 60) {
       setContent(styleize(children));
     }
     handle.current = requestAnimationFrame(cb);
