@@ -6,7 +6,7 @@ const CLASSES = ["roboto", "sankofa"];
 const CHARS = ["●", "★", "▲", "■", "▼", "◆", "○", "◇", "◎", "◉"];
 
 const getRandomClass = () => {
-  if (Math.random() > 0.02) {
+  if (Math.random() > 0.2) {
     return "roboto";
   }
 
@@ -18,11 +18,11 @@ const styleize = (text: string) => {
     let str = c;
     const rand = Math.random();
     switch (true) {
-      case rand < 0.005: {
+      case rand < 0.1: {
         str = CHARS[Math.floor(Math.random() * CHARS.length)];
         break;
       }
-      case rand < 0.02: {
+      case rand < 0.2: {
         str = c.toUpperCase();
         break;
       }
@@ -45,7 +45,9 @@ export default function Text(props: TextProps) {
   const handle = useRef<number | null>(null);
 
   const cb = useCallback(() => {
-    setContent(styleize(props.children));
+    if (Math.random() < 0.05) {
+      setContent(styleize(props.children));
+    }
     handle.current = requestAnimationFrame(cb);
   }, [props.children]);
 
