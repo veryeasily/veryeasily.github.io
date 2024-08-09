@@ -17,7 +17,7 @@ export default function BasePage({ header, children }: BasePageProps) {
       </h1>
 
       <div className="flex w-full max-w-screen-sm flex-col">
-        <h2 className="mb-1 border-b border-white text-xs">
+        <h2 className="mb-1 border-b border-black text-xs">
           <Text>{header}</Text>
         </h2>
 
