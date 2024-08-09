@@ -9,16 +9,22 @@ const LINKS = [
     href: "/art",
     text: "art",
   },
+  {
+    href: "https://soundcloud.com/siiiiinging",
+    target: "_blank",
+    text: "music",
+  },
 ];
 
 export default function Header() {
   return (
     <header className="flex justify-center gap-3 py-12">
-      {LINKS.map(({ href, text }) => (
+      {LINKS.map(({ href, target, text }) => (
         <Link
           key={href}
+          target={target ? target : undefined}
           href={href}
-          className="text-primary border border-white bg-white px-3 py-1 text-2xl underline transition hover:border-teal-500 hover:text-teal-500"
+          className="header-btn"
         >
           {text}
         </Link>

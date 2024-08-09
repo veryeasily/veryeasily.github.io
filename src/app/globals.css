@@ -29,25 +29,41 @@
 
 @keyframes color-cycle {
   0% {
-    background-color: var(--my-red);
+    background-color: theme("colors.primary.DEFAULT");
   }
   25% {
-    background-color: var(--my-green);
+    background-color: theme("colors.secondary.DEFAULT");
   }
   50% {
-    background-color: var(--my-aqua);
+    background-color: theme("colors.tertiary.DEFAULT");
   }
   75% {
-    background-color: var(--my-yellow);
+    background-color: theme("colors.quaternary.DEFAULT");
   }
   100% {
-    background-color: var(--my-red);
+    background-color: theme("colors.primary.DEFAULT");
   }
 }
 
 body {
   color: rgb(var(--foreground-rgb));
   animation: 8s infinite color-cycle;
+}
+
+@layer components {
+  .header-btn {
+    @apply border;
+    @apply border-white;
+    @apply bg-white;
+    @apply px-3;
+    @apply py-1;
+    @apply text-2xl;
+    @apply text-primary;
+    @apply underline;
+    @apply hover:border-teal-500 hover:text-teal-500;
+    @apply duration-150;
+    transition-property: border;
+  }
 }
 
 @layer utilities {

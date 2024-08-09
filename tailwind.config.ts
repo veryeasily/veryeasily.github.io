@@ -12,6 +12,15 @@ const config: Config = {
         primary: {
           DEFAULT: "#ff6b6b",
         },
+        secondary: {
+          DEFAULT: "#c7f464",
+        },
+        tertiary: {
+          DEFAULT: "#4ecdc4",
+        },
+        quaternary: {
+          DEFAULT: "#ffff6f",
+        },
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
