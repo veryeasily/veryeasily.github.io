@@ -108,7 +108,7 @@ export default function Artwork({
         }}
         onClick={(e) => {
           e.stopPropagation();
-          console.log("CLICK", e);
+          e.nativeEvent.stopImmediatePropagation();
           onClick();
         }}
         {...rest}
