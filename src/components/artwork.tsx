@@ -15,6 +15,7 @@ export interface ArtworkProps {
   src: string;
   active?: boolean;
   onClick?: () => void;
+  [key: string]: any;
 }
 
 function makeRandomPosition() {
@@ -69,6 +70,7 @@ function useRandomPosition() {
 export default function Artwork({
   src,
   active = false,
+  onClick = () => {},
   ...rest
 }: ArtworkProps) {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
@@ -103,6 +105,11 @@ export default function Artwork({
         style={{
           maxWidth: wrapper.width,
           maxHeight: wrapper.height,
+        }}
+        onClick={(e) => {
+          e.stopPropagation();
+          console.log("CLICK", e);
+          onClick();
         }}
         {...rest}
       />

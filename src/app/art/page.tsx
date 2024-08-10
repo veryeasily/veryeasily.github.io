@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import BasePage from "@/components/base_page";
 import Artwork, { ArtworkContext } from "@/components/artwork";
@@ -15,6 +15,14 @@ function getDimensions(elt: HTMLDivElement | null) {
 export default function ArtPage() {
   const [active, setActive] = useState<string | null>(null);
   const [elt, setElt] = useState<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const bgClick = (e: MouseEvent) => {
+      setActive(null);
+    };
+    document.addEventListener("click", bgClick);
+    return () => document.removeEventListener("click", bgClick);
+  }, []);
 
   return (
     <ArtworkContext.Provider value={getDimensions(elt)}>
