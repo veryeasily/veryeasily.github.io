@@ -3,20 +3,25 @@ import Link from "next/link.js";
 const LINKS = [
   {
     href: "/",
-    text: "home",
+    text: <span>home</span>,
   },
   {
     href: "/work",
-    text: "work",
+    text: <span>work</span>,
   },
   {
     href: "/art",
-    text: "art",
+    text: <span>art</span>,
   },
   {
     href: "https://soundcloud.com/siiiiinging",
     target: "_blank",
-    text: "music",
+    text: (
+      <div className="flex items-center gap-0.5">
+        <span>music</span>
+        <span className="material-symbols--open-in-new mt-1" />
+      </div>
+    ),
   },
 ];
 
