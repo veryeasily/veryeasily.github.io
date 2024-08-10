@@ -1,6 +1,8 @@
+import "./globals.css";
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import clsx from "clsx";
 
 import Header from "@/app/header";
 
@@ -19,9 +21,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body
+        className={clsx(
+          inter.className,
+          "flex min-h-screen flex-col overflow-hidden",
+        )}
+      >
         <Header />
-        <main className="relative w-full flex-1 px-12 md:px-4">{children}</main>
+        <main className="relative flex w-full flex-auto flex-col">
+          {children}
+        </main>
       </body>
     </html>
   );

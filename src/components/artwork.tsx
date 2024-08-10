@@ -37,9 +37,7 @@ function makeTransform(
   const height = window?.innerHeight || 0;
 
   if (active) {
-    const cx = width / 2;
-    const cy = height / 2;
-    return `translate3d(-50%, -50%, 0) translate3d(${cx}px, ${cy}px, 0)`;
+    return `translate3d(-50%, -50%, 0)`;
   }
 
   return `
@@ -85,7 +83,10 @@ export default function Artwork({
     <img
       src={src}
       alt="artwork"
-      className={clsx("absolute left-0 top-0 duration-1000")}
+      className={clsx(
+        "absolute left-0 top-0 max-h-full max-w-full cursor-pointer p-4 duration-1000",
+        active && "left-1/2 top-1/2",
+      )}
       style={{
         transform: makeTransform(position, active),
       }}

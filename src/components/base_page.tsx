@@ -1,4 +1,5 @@
 import Text from "@/components/text";
+import clsx from "clsx";
 
 export interface BasePageProps {
   children: React.ReactNode;
@@ -6,10 +7,12 @@ export interface BasePageProps {
 
 export default function BasePage({ children }: BasePageProps) {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-start gap-1 text-base">
-      <div className="flex w-full max-w-screen-sm flex-col">
-        <div className="flex flex-col">{children}</div>
-      </div>
-    </main>
+    <div
+      className={clsx(
+        "mx-auto flex w-full max-w-screen-sm flex-shrink-0 flex-grow flex-col text-base",
+      )}
+    >
+      {children}
+    </div>
   );
 }

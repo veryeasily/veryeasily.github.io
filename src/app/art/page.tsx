@@ -13,7 +13,7 @@ export default function ArtPage() {
     <BasePage>
       <h3 className="text-2xl">artwork here:</h3>
 
-      <div>
+      <div className="relative flex-1">
         {IMG_LIST.map((src) => (
           <Artwork
             src={src}
