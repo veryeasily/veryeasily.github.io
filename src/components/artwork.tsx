@@ -6,6 +6,11 @@ import clsx from "clsx";
 
 const INTERVAL_TIME = 1500;
 
+export const ArtworkContext = React.createContext({
+  width: 0,
+  height: 0,
+});
+
 export interface ArtworkProps {
   src: string;
   active?: boolean;
@@ -69,6 +74,7 @@ export default function Artwork({
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const position = useRandomPosition();
   const loaded = dimensions.width > 0 && dimensions.height > 0;
+  const wrapper = React.use(ArtworkContext);
 
   useEffect(() => {
     const img = new Image();
@@ -80,17 +86,24 @@ export default function Artwork({
   }, [src]);
 
   return !loaded ? null : (
-    <img
-      src={src}
-      alt="artwork"
+    <div
       className={clsx(
-        "absolute left-0 top-0 max-h-full max-w-full cursor-pointer p-4 duration-1000",
-        active && "left-1/2 top-1/2",
+        "absolute left-0 top-0 cursor-pointer duration-1000",
+        active && "active-artwork left-1/2 top-1/2 border border-dashed",
       )}
       style={{
         transform: makeTransform(position, active),
       }}
-      {...rest}
-    />
+    >
+      <img
+        src={src}
+        alt="artwork"
+        style={{
+          maxWidth: wrapper.width,
+          maxHeight: wrapper.height,
+        }}
+        {...rest}
+      />
+    </div>
   );
 }
