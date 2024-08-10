@@ -1,36 +1,31 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 import BasePage from "@/components/base_page";
 import Artwork, { ArtworkContext } from "@/components/artwork";
 import { IMG_LIST } from "@/lib/constants";
 
+function getDimensions(elt: HTMLDivElement | null) {
+  const width = elt?.clientWidth || Infinity;
+  const height = elt?.clientHeight || Infinity;
+  return { width, height };
+}
+
 export default function ArtPage() {
   const [active, setActive] = useState<string | null>(null);
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-  const wrapper = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const elt = wrapper.current;
-    const needsUpdate =
-      elt &&
-      elt.clientWidth !== dimensions.width &&
-      elt.clientHeight !== dimensions.height;
-    if (!needsUpdate) return;
-
-    setDimensions({
-      width: elt.clientWidth,
-      height: elt.clientHeight,
-    });
-  }, [dimensions]);
+  const [elt, setElt] = useState<HTMLDivElement | null>(null);
 
   return (
-    <ArtworkContext.Provider value={dimensions}>
+    <ArtworkContext.Provider value={getDimensions(elt)}>
       <BasePage>
         <h3 className="text-2xl">artwork here:</h3>
-
-        <div ref={wrapper} className="relative flex-1">
+        <div
+          ref={(div) => {
+            if (div !== elt) setElt(div);
+          }}
+          className="relative flex-1"
+        >
           {IMG_LIST.map((src) => (
             <Artwork
               src={src}
