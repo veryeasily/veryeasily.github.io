@@ -1,24 +1,47 @@
 "use client";
 
-import clsx from "clsx";
 import * as React from "react";
 import { useEffect, useState } from "react";
+
+const INTERVAL_TIME = 1500;
 
 export interface ArtworkProps {
   src: string;
 }
 
+function makeRandomPosition() {
+  // need to dance around server-side rendering here
+  const window = globalThis.window;
+  const width = window?.innerWidth || 0;
+  const height = window?.innerHeight || 0;
+  return {
+    x: Math.floor(Math.random() * width) - width / 2,
+    y: Math.floor(Math.random() * height) - height / 2,
+    z: Math.floor(Math.random() * -10),
+    rotateX: Math.random(),
+    rotateY: Math.random(),
+    rotateZ: Math.random(),
+    rotateDeg: Math.floor(Math.random() * 180),
+  };
+}
+
+function useRandomPosition() {
+  const [position, setPosition] = useState(() => makeRandomPosition());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPosition(makeRandomPosition());
+    }, INTERVAL_TIME);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return position;
+}
+
 export default function Artwork({ src }: ArtworkProps) {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-  const [position, setPosition] = useState({
-    x: 0,
-    y: 0,
-    z: 0,
-    rotateX: 0,
-    rotateY: 0,
-    rotateZ: 0,
-    rotateDeg: 0,
-  });
+  const position = useRandomPosition();
   const loaded = dimensions.width > 0 && dimensions.height > 0;
 
   useEffect(() => {
@@ -26,35 +49,11 @@ export default function Artwork({ src }: ArtworkProps) {
     img.src = src;
     img.onload = (e: Event) => {
       const img = e.target as HTMLImageElement;
-      console.log("loaded", img.naturalWidth, img.naturalHeight);
       setDimensions({ width: img.naturalWidth, height: img.naturalHeight });
     };
   }, [src]);
 
-  useEffect(() => {
-    if (!loaded) return;
-
-    const interval = setInterval(() => {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      const x = Math.floor(Math.random() * width) - width / 2;
-      const y = Math.floor(Math.random() * height) - height / 2;
-      const z = Math.floor(Math.random() * -10);
-      setPosition({
-        x,
-        y,
-        z,
-        rotateX: Math.random(),
-        rotateY: Math.random(),
-        rotateZ: Math.random(),
-        rotateDeg: Math.floor(Math.random() * 180),
-      });
-    }, 1500);
-
-    return () => clearInterval(interval);
-  }, [loaded]);
-
-  return loaded ? (
+  return !loaded ? null : (
     <img
       src={src}
       alt="artwork"
@@ -67,5 +66,5 @@ export default function Artwork({ src }: ArtworkProps) {
         `,
       }}
     />
-  ) : null;
+  );
 }
