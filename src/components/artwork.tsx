@@ -85,11 +85,13 @@ export default function Artwork({
     };
   }, [src]);
 
-  return !loaded ? null : (
+  if (!loaded) return null;
+
+  return (
     <div
       className={clsx(
         "absolute left-0 top-0 cursor-pointer duration-1000",
-        active && "left-1/2 top-1/2",
+        active && "left-1/2 top-1/2 z-10",
       )}
       style={{
         transform: makeTransform(position, active),
