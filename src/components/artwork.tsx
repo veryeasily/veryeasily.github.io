@@ -57,7 +57,7 @@ export default function Artwork({ src }: ArtworkProps) {
     <img
       src={src}
       alt="artwork"
-      className="absolute left-0 top-0 duration-500"
+      className="absolute left-0 top-0 duration-1000"
       style={{
         transform: `
           translate3d(${position.x}px, ${position.y}px, ${position.z}px)
