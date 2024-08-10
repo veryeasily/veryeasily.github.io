@@ -6,10 +6,6 @@ const LINKS = [
     text: <span>home</span>,
   },
   {
-    href: "/work",
-    text: <span>work</span>,
-  },
-  {
     href: "/art",
     text: <span>art</span>,
   },
