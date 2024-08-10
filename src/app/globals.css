@@ -44,50 +44,10 @@
     background-color: theme("colors.primary.DEFAULT");
   }
 }
-/*
-@keyframes color-cycle-two {
-  0% {
-    border-color: theme("colors.tertiary.DEFAULT");
-  }
-  25% {
-    border-color: theme("colors.quaternary.DEFAULT");
-  }
-  50% {
-    border-color: theme("colors.primary.DEFAULT");
-  }
-  75% {
-    border-color: theme("colors.secondary.DEFAULT");
-  }
-  100% {
-    border-color: theme("colors.tertiary.DEFAULT");
-  }
-} */
-
-@keyframes color-cycle-two {
-  0% {
-    border-color: theme("colors.zinc.500");
-  }
-  25% {
-    border-color: theme("colors.zinc.300");
-  }
-  50% {
-    border-color: theme("colors.zinc.700");
-  }
-  75% {
-    border-color: theme("colors.zinc.100");
-  }
-  100% {
-    border-color: theme("colors.zinc.500");
-  }
-}
 
 body {
   color: rgb(var(--foreground-rgb));
   animation: 8s infinite color-cycle;
-}
-
-.active-artwork {
-  animation: 8s infinite color-cycle-two;
 }
 
 @layer components {

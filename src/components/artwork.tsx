@@ -89,7 +89,7 @@ export default function Artwork({
     <div
       className={clsx(
         "absolute left-0 top-0 cursor-pointer duration-1000",
-        active && "active-artwork left-1/2 top-1/2 border border-dashed",
+        active && "left-1/2 top-1/2",
       )}
       style={{
         transform: makeTransform(position, active),
