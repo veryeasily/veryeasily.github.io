@@ -2,11 +2,14 @@
 
 import * as React from "react";
 import { useEffect, useState } from "react";
+import clsx from "clsx";
 
 const INTERVAL_TIME = 1500;
 
 export interface ArtworkProps {
   src: string;
+  active?: boolean;
+  onClick?: () => void;
 }
 
 function makeRandomPosition() {
@@ -25,6 +28,27 @@ function makeRandomPosition() {
   };
 }
 
+function makeTransform(
+  position: ReturnType<typeof makeRandomPosition>,
+  active: boolean,
+) {
+  const window = globalThis.window;
+  const width = window?.innerWidth || 0;
+  const height = window?.innerHeight || 0;
+
+  if (active) {
+    const cx = width / 2;
+    const cy = height / 2;
+    return `translate3d(-50%, -50%, 0) translate3d(${cx}px, ${cy}px, 0)`;
+  }
+
+  return `
+    translate3d(${position.x}px, ${position.y}px, ${position.z}px)
+    rotate3d(${position.rotateX}, ${position.rotateY}, ${position.rotateZ}, ${position.rotateDeg}deg)
+    scale(0.5)
+  `;
+}
+
 function useRandomPosition() {
   const [position, setPosition] = useState(() => makeRandomPosition());
 
@@ -39,7 +63,11 @@ function useRandomPosition() {
   return position;
 }
 
-export default function Artwork({ src }: ArtworkProps) {
+export default function Artwork({
+  src,
+  active = false,
+  ...rest
+}: ArtworkProps) {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const position = useRandomPosition();
   const loaded = dimensions.width > 0 && dimensions.height > 0;
@@ -57,14 +85,11 @@ export default function Artwork({ src }: ArtworkProps) {
     <img
       src={src}
       alt="artwork"
-      className="absolute left-0 top-0 duration-1000"
+      className={clsx("absolute left-0 top-0 duration-1000")}
       style={{
-        transform: `
-          translate3d(${position.x}px, ${position.y}px, ${position.z}px)
-          rotate3d(${position.rotateX}, ${position.rotateY}, ${position.rotateZ}, ${position.rotateDeg}deg)
-          scale(0.5)
-        `,
+        transform: makeTransform(position, active),
       }}
+      {...rest}
     />
   );
 }
