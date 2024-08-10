@@ -11,7 +11,7 @@ export default function HomePage() {
         <div className="text-lg">
           <p>for now, you can see my resume here:</p>
           <Link
-            href={process.env.NEXT_PUBLIC_RESUME_URL || ""}
+            href="https://drive.google.com/file/d/1v1VjByEnhcjktkTrMWXCxMA2Dor5gEE-/view?usp=sharing"
             className="text-blue-500 underline"
             target="_blank"
           >
