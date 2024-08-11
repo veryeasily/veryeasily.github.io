@@ -24,13 +24,15 @@ export default function RootLayout({
       <body
         className={clsx(
           inter.className,
-          "flex min-h-screen flex-col overflow-hidden",
+          "layout flex min-h-screen min-w-full flex-col overflow-hidden",
         )}
       >
-        <Header />
-        <main className="relative flex w-full flex-auto flex-col">
-          {children}
-        </main>
+        <div className="layout__outer flex h-full w-full flex-1 flex-col gap-4 md:gap-8">
+          <Header />
+          <main className="layout__main relative flex w-full flex-auto flex-col">
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   );

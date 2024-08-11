@@ -47,7 +47,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  animation: 8s infinite color-cycle;
+  animation: 48s infinite color-cycle;
 }
 
 @layer components {
@@ -57,7 +57,7 @@ body {
     @apply bg-white;
     @apply px-3;
     @apply py-1;
-    @apply text-2xl;
+    @apply text-base md:text-2xl;
     @apply text-primary;
     @apply underline;
     @apply hover:border-teal-500 hover:text-teal-500;
