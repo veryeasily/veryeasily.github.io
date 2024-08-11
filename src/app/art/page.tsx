@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import BasePage from "@/components/base_page";
 import Artwork, { ArtworkContext } from "@/components/artwork";
 import { IMG_LIST } from "@/lib/constants";
+import clsx from "clsx";
 
 function getDimensions(elt: HTMLDivElement | null) {
   const width = elt?.clientWidth || Infinity;
@@ -28,6 +29,12 @@ export default function ArtPage() {
     <ArtworkContext.Provider value={getDimensions(elt)}>
       <BasePage>
         <h3 className="text-2xl">artwork here:</h3>
+        <div
+          className={clsx(
+            "art-page__backdrop pointer-events-none fixed inset-0 z-10 bg-black transition-all duration-1000",
+            active ? "bg-opacity-85" : "bg-opacity-0",
+          )}
+        ></div>
         <div
           ref={(div) => {
             if (div !== elt) setElt(div);
