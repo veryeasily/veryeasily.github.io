@@ -23,7 +23,7 @@ const LINKS = [
 
 export default function Header() {
   return (
-    <header className="flex flex-none justify-center gap-3 py-12">
+    <header className="mb-2 flex flex-none justify-center gap-3 p-8">
       {LINKS.map(({ href, target, text }) => (
         <Link key={href} target={target} href={href} className="header-btn">
           {text}
