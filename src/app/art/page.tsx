@@ -29,17 +29,19 @@ export default function ArtPage() {
     <ArtworkContext.Provider value={getDimensions(elt)}>
       <BasePage>
         <h3 className="text-2xl">artwork here:</h3>
+
         <div
           className={clsx(
             "art-page__backdrop pointer-events-none fixed inset-0 z-10 bg-black transition-all duration-1000",
             active ? "bg-opacity-85" : "bg-opacity-0",
           )}
-        ></div>
+        />
+
         <div
           ref={(div) => {
             if (div !== elt) setElt(div);
           }}
-          className="relative flex-1"
+          className="relative m-4 flex-1 md:m-6"
         >
           {IMG_LIST.map((src) => (
             <Artwork
