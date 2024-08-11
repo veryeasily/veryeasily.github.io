@@ -15,7 +15,7 @@ export default function HomePage() {
             you can see my resume{" "}
             <Link
               href="https://drive.google.com/file/d/15eq-Ec4faLtWqT8hZ68_YsUuEYIuiSae/view?usp=sharing"
-              className="text-blue-500 underline"
+              className="text-primary underline"
               target="_blank"
             >
               here
