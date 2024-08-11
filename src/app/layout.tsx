@@ -20,19 +20,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="layout h-full">
       <body
         className={clsx(
           inter.className,
-          "layout flex min-h-screen min-w-full flex-col overflow-hidden",
+          "layout__body flex min-h-full flex-col gap-8 md:gap-16",
         )}
       >
-        <div className="layout__outer flex h-full w-full flex-1 flex-col gap-4 md:gap-8">
-          <Header />
-          <main className="layout__main relative flex w-full flex-auto flex-col">
-            {children}
-          </main>
-        </div>
+        <Header />
+        <main className="layout__main mx-auto flex w-full max-w-screen-sm flex-1 flex-col px-2 md:px-4">
+          {children}
+        </main>
       </body>
     </html>
   );
