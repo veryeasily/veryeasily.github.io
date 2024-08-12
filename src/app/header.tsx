@@ -46,7 +46,7 @@ function HeaderLink({
       target={target}
       className={clsx(
         pathname === href ? HEADER_CLASSES.active : HEADER_CLASSES.inactive,
-        "header-lnk border px-1.5 py-0.5 hover:border-teal-400 hover:text-teal-400",
+        "header-lnk border px-1.5 py-0.5 hover:border-teal-500 hover:bg-white hover:text-teal-500 active:border-teal-400 active:text-teal-400",
       )}
     >
       <div className="header-lnk__inner flex items-center gap-1 text-base leading-none underline md:text-2xl">
