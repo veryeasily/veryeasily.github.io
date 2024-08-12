@@ -28,8 +28,8 @@ const LINKS: React.HTMLProps<HTMLAnchorElement>[] = [
 ];
 
 const HEADER_CLASSES = {
-  active: "bg-primary border-white text-white",
-  inactive: "bg-white border-white text-primary",
+  active: "border-gray-400 text-primary",
+  inactive: "border-white text-primary",
 };
 
 function HeaderLink({
@@ -46,13 +46,13 @@ function HeaderLink({
       target={target}
       className={clsx(
         pathname === href ? HEADER_CLASSES.active : HEADER_CLASSES.inactive,
-        "header-lnk border px-1.5 py-0.5 hover:border-teal-500 hover:bg-white hover:text-teal-500 active:border-teal-400 active:text-teal-400",
+        "header__link border bg-white px-1.5 py-0.5 hover:border-teal-500 hover:text-teal-500 active:border-teal-400 active:text-teal-400",
       )}
     >
-      <div className="header-lnk__inner flex items-center gap-1 text-base leading-none underline md:text-2xl">
-        <div className="header-link__text">{children}</div>
+      <div className="header__inner-link flex items-center gap-1 text-base leading-none underline md:text-2xl">
+        <div className="header__link-text">{children}</div>
         {isNewTab && (
-          <div className="header-lnk__new-tab material-symbols--open-in-new relative mt-0.5 text-xs md:mt-1" />
+          <div className="header__new-tab-link material-symbols--open-in-new relative mt-0.5 text-xs md:mt-1" />
         )}
       </div>
     </Link>
