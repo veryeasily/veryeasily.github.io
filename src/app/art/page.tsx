@@ -28,7 +28,7 @@ export default function ArtPage() {
         )}
       />
 
-      <div className="js-artwork-container fixed inset-0">
+      <div className="js-artwork-container fixed inset-0 z-10">
         {IMG_LIST.map((src) => (
           <Artwork
             src={src}
