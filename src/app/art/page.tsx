@@ -3,18 +3,11 @@
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 
-import Artwork, { ArtworkContext } from "@/components/artwork";
-import { IMG_LIST } from "@/lib/constants";
-
-function getDimensions(elt: HTMLDivElement | null) {
-  const width = elt?.clientWidth || Infinity;
-  const height = elt?.clientHeight || Infinity;
-  return { width, height };
-}
+import Artwork from "@/ui/artwork";
+import { IMG_LIST } from "@/lib/constants.ts";
 
 export default function ArtPage() {
   const [active, setActive] = useState<string | null>(null);
-  const [elt, setElt] = useState<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const bgClick = (e: MouseEvent) => {
@@ -25,7 +18,7 @@ export default function ArtPage() {
   }, []);
 
   return (
-    <ArtworkContext.Provider value={getDimensions(elt)}>
+    <div>
       <h3 className="text-2xl">artwork here:</h3>
 
       <div
@@ -35,12 +28,7 @@ export default function ArtPage() {
         )}
       />
 
-      <div
-        ref={(div) => {
-          if (div !== elt) setElt(div);
-        }}
-        className="relative m-4 flex-1 md:m-6"
-      >
+      <div className="js-artwork-container fixed inset-0">
         {IMG_LIST.map((src) => (
           <Artwork
             src={src}
@@ -52,6 +40,6 @@ export default function ArtPage() {
           />
         ))}
       </div>
-    </ArtworkContext.Provider>
+    </div>
   );
 }

@@ -1,4 +1,10 @@
+"use client";
+
+import clsx from "clsx";
 import Link from "next/link.js";
+import { usePathname } from "next/navigation.js";
+
+import { classes } from "@/lib/classes.ts";
 
 const LINKS: React.HTMLProps<HTMLAnchorElement>[] = [
   {
@@ -21,18 +27,27 @@ const LINKS: React.HTMLProps<HTMLAnchorElement>[] = [
   },
 ];
 
+const HEADER_CLASSES = {
+  active: "border border-gray-500 text-primary",
+  inactive: "border-white text-primary",
+};
+
 function HeaderLink({
   children,
   target,
   href = "#",
 }: React.HTMLProps<HTMLAnchorElement>) {
   const isNewTab = target === "_blank";
+  const pathname = usePathname();
 
   return (
     <Link
       href={href}
       target={target}
-      className="header-lnk border border-white bg-white px-1.5 py-0.5 text-primary hover:border-teal-500 hover:text-teal-500"
+      className={clsx(
+        pathname === href ? HEADER_CLASSES.active : HEADER_CLASSES.inactive,
+        "header-lnk border bg-white px-1.5 py-0.5 hover:border-teal-500 hover:text-teal-500",
+      )}
     >
       <div className="header-lnk__inner flex items-center gap-1 text-base leading-none underline md:text-2xl">
         <div className="header-link__text">{children}</div>
@@ -44,10 +59,12 @@ function HeaderLink({
   );
 }
 
-export default function Header() {
+export default function Header({
+  className,
+  ...rest
+}: React.HTMLProps<HTMLDivElement>) {
   return (
-    // <div className="border-b border-slate-500 bg-slate-500 bg-opacity-10 shadow shadow-slate-500">
-    <div className="shadow-2xl shadow-primary">
+    <div className={classes("shadow-2xl shadow-primary", className)} {...rest}>
       <header className="mx-auto flex w-full max-w-screen-sm flex-none justify-start gap-1.5 p-2 md:gap-2.5 md:p-4">
         {LINKS.map((props) => (
           <HeaderLink key={props.href} {...props} />

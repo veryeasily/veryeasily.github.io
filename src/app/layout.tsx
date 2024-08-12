@@ -27,7 +27,7 @@ export default function RootLayout({
           "layout__body flex min-h-full flex-col gap-8 md:gap-16",
         )}
       >
-        <Header />
+        <Header className="z-50" />
         <main className="layout__main mx-auto flex w-full max-w-screen-sm flex-1 flex-col px-2 md:px-4">
           {children}
         </main>

@@ -76,7 +76,13 @@ export default function Artwork({
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const position = useRandomPosition();
   const loaded = dimensions.width > 0 && dimensions.height > 0;
-  const wrapper = React.use(ArtworkContext);
+  const [elt, setElt] = useState<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!elt) {
+      setElt(document.querySelector(".js-artwork-container") as HTMLDivElement);
+    }
+  }, [elt]);
 
   useEffect(() => {
     const img = new Image();
@@ -103,8 +109,8 @@ export default function Artwork({
         src={src}
         alt="artwork"
         style={{
-          maxWidth: wrapper.width,
-          maxHeight: wrapper.height,
+          maxWidth: elt?.clientWidth,
+          maxHeight: elt?.clientHeight,
         }}
         onClick={(e) => {
           e.stopPropagation();
