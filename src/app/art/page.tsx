@@ -5,12 +5,14 @@ import { useState } from "react";
 
 import Artwork from "@/components/artwork";
 import { IMG_LIST } from "@/lib/constants.ts";
+import { useStore } from "@/lib/store.ts";
 
 export default function ArtPage() {
   const [active, setActive] = useState<string | null>(null);
+  const store = useStore();
 
   return (
-    <div className="art-page relative">
+    <div className="art-page">
       <h3 className="text-2xl">artwork here:</h3>
 
       <div
@@ -21,7 +23,12 @@ export default function ArtPage() {
         onClick={() => setActive(null)}
       />
 
-      <div className="js-artwork-container absolute inset-0">
+      <div
+        className="js-artwork-container fixed inset-0 m-16"
+        style={{
+          marginTop: `${store.headerHeight + 64}px`,
+        }}
+      >
         {IMG_LIST.map((src) => (
           <Artwork
             src={src}
