@@ -9,11 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@redux-devtools/extension": "^3.3.0",
     "clsx": "^2.1.1",
+    "immer": "^10.1.1",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18",
-    "tailwind-merge": "^2.5.0"
+    "tailwind-merge": "^2.5.0",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -5,6 +5,8 @@ import Link from "next/link.js";
 import { usePathname } from "next/navigation.js";
 
 import { classes } from "@/lib/classes.ts";
+import { useStore } from "@/lib/store.ts";
+import { useState } from "react";
 
 const LINKS: React.HTMLProps<HTMLAnchorElement>[] = [
   {
@@ -63,8 +65,18 @@ export default function Header({
   className,
   ...rest
 }: React.HTMLProps<HTMLDivElement>) {
+  const [height, setHeight] = useState(0);
+  const store = useStore();
+
   return (
-    <div className={classes("shadow-2xl shadow-primary", className)} {...rest}>
+    <div
+      className={classes("shadow-2xl shadow-primary", className)}
+      ref={(div) => {
+        const { offsetHeight = 0 } = div || {};
+        setHeight(offsetHeight);
+      }}
+      {...rest}
+    >
       <header className="mx-auto flex w-full max-w-screen-sm flex-none justify-start gap-1.5 p-2 md:gap-2.5 md:p-4">
         {LINKS.map((props) => (
           <HeaderLink key={props.href} {...props} />
