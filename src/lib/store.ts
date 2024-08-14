@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { devtools } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 
 interface State {
@@ -7,8 +8,14 @@ interface State {
 }
 
 export const useStore = create<State>()(
-  immer((set) => ({
-    headerHeight: 0,
-    setHeaderHeight: (height) => set({ headerHeight: height }),
-  })),
+  devtools(
+    immer((set) => ({
+      headerHeight: 0,
+      setHeaderHeight: (height) =>
+        set((state) => {
+          console.log("setHeaderHeight", height, state.headerHeight);
+          state.headerHeight = height;
+        }),
+    })),
+  ),
 );

@@ -66,15 +66,16 @@ export default function Header({
   className,
   ...rest
 }: React.HTMLProps<HTMLDivElement>) {
-  const [height, setHeight] = useState(0);
   const store = useStore();
 
   return (
     <div
       className={classes("shadow-2xl shadow-primary", className)}
       ref={(div) => {
-        const { offsetHeight = 0 } = div || {};
-        setHeight(offsetHeight);
+        if (!div) return;
+
+        const { clientHeight = 0 } = div || {};
+        store.setHeaderHeight(clientHeight);
       }}
       {...rest}
     >
