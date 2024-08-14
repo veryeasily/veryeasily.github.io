@@ -4,6 +4,6 @@ const nextConfig = {
   images: {
     unoptimized: true, // Disable image optimization (GitHub Pages doesn't support Next.js image optimization)
   },
-};
+}
 
-export default nextConfig;
+export default nextConfig

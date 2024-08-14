@@ -1,3 +1,6 @@
-module.exports = {
-  plugins: ["prettier-plugin-tailwindcss"],
-};
+/** @type {import("prettier").Config} */
+const config = {
+  semi: false,
+}
+
+module.exports = config

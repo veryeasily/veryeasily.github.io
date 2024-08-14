@@ -1,0 +1,38 @@
+@layer base {
+    :root {
+        --desktop-width: 960px;
+        --my-red: #ff6b6b;
+        --my-green: #c7f464;
+        --my-aqua: #4ecdc4;
+        --my-yellow: #ffff6f;
+        --my-white: rgb(253, 253, 253);
+        --my-black: rgb(26, 14, 0);
+
+        --foreground-rgb: 0, 0, 0;
+        --background-start-rgb: 214, 219, 220;
+        --background-end-rgb: 255, 255, 255;
+    }
+
+    @keyframes color-cycle {
+        0% {
+            background-color: theme("colors.primary.DEFAULT");
+        }
+        25% {
+            background-color: theme("colors.secondary.DEFAULT");
+        }
+        50% {
+            background-color: theme("colors.tertiary.DEFAULT");
+        }
+        75% {
+            background-color: theme("colors.quaternary.DEFAULT");
+        }
+        100% {
+            background-color: theme("colors.primary.DEFAULT");
+        }
+    }
+
+    body {
+        color: rgb(var(--foreground-rgb));
+        animation: 48s infinite color-cycle;
+    }
+}

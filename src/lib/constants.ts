@@ -8,4 +8,4 @@ export const IMG_LIST = [
   "https://c1.staticflickr.com/6/5500/9288758335_d9258bf52b_h.jpg",
   "https://c1.staticflickr.com/8/7404/9288761047_22fa63c71b_h.jpg",
   "https://c1.staticflickr.com/8/7383/9291545346_1ca204e760_h.jpg",
-];
+]

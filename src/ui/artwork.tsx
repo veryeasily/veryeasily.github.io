@@ -1,28 +1,28 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { useEffect, useState } from "react";
-import clsx from "clsx";
+import * as React from "react"
+import { useEffect, useState } from "react"
+import clsx from "clsx"
 
-const INTERVAL_TIME = 1500;
+const INTERVAL_TIME = 1500
 
 export const ArtworkContext = React.createContext({
   width: 0,
   height: 0,
-});
+})
 
 export interface ArtworkProps {
-  src: string;
-  active?: boolean;
-  onClick?: () => void;
-  [key: string]: any;
+  src: string
+  active?: boolean
+  onClick?: () => void
+  [key: string]: any
 }
 
 function makeRandomPosition() {
   // need to dance around server-side rendering here
-  const window = globalThis.window;
-  const width = window?.innerWidth || 0;
-  const height = window?.innerHeight || 0;
+  const window = globalThis.window
+  const width = window?.innerWidth || 0
+  const height = window?.innerHeight || 0
   return {
     x: Math.floor(Math.random() * width) - width / 2,
     y: Math.floor(Math.random() * height) - height / 2,
@@ -31,40 +31,37 @@ function makeRandomPosition() {
     rotateY: Math.random(),
     rotateZ: Math.random(),
     rotateDeg: Math.floor(Math.random() * 180),
-  };
+  }
 }
 
-function makeTransform(
-  position: ReturnType<typeof makeRandomPosition>,
-  active: boolean,
-) {
-  const window = globalThis.window;
-  const width = window?.innerWidth || 0;
-  const height = window?.innerHeight || 0;
+function makeTransform(position: ReturnType<typeof makeRandomPosition>, active: boolean) {
+  const window = globalThis.window
+  const width = window?.innerWidth || 0
+  const height = window?.innerHeight || 0
 
   if (active) {
-    return `translate3d(-50%, -50%, 0)`;
+    return `translate3d(-50%, -50%, 0)`
   }
 
   return `
     translate3d(${position.x}px, ${position.y}px, ${position.z}px)
     rotate3d(${position.rotateX}, ${position.rotateY}, ${position.rotateZ}, ${position.rotateDeg}deg)
     scale(0.5)
-  `;
+  `
 }
 
 function useRandomPosition() {
-  const [position, setPosition] = useState(() => makeRandomPosition());
+  const [position, setPosition] = useState(() => makeRandomPosition())
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setPosition(makeRandomPosition());
-    }, INTERVAL_TIME);
+      setPosition(makeRandomPosition())
+    }, INTERVAL_TIME)
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearInterval(interval)
+  }, [])
 
-  return position;
+  return position
 }
 
 export default function Artwork({
@@ -73,27 +70,27 @@ export default function Artwork({
   onClick = () => {},
   ...rest
 }: ArtworkProps) {
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-  const position = useRandomPosition();
-  const loaded = dimensions.width > 0 && dimensions.height > 0;
-  const [elt, setElt] = useState<HTMLDivElement | null>(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
+  const position = useRandomPosition()
+  const loaded = dimensions.width > 0 && dimensions.height > 0
+  const [elt, setElt] = useState<HTMLDivElement | null>(null)
 
   useEffect(() => {
     if (!elt) {
-      setElt(document.querySelector(".js-artwork-container") as HTMLDivElement);
+      setElt(document.querySelector(".js-artwork-container") as HTMLDivElement)
     }
-  }, [elt]);
+  }, [elt])
 
   useEffect(() => {
-    const img = new Image();
-    img.src = src;
+    const img = new Image()
+    img.src = src
     img.onload = (e: Event) => {
-      const img = e.target as HTMLImageElement;
-      setDimensions({ width: img.naturalWidth, height: img.naturalHeight });
-    };
-  }, [src]);
+      const img = e.target as HTMLImageElement
+      setDimensions({ width: img.naturalWidth, height: img.naturalHeight })
+    }
+  }, [src])
 
-  if (!loaded) return null;
+  if (!loaded) return null
 
   return (
     <div
@@ -113,12 +110,12 @@ export default function Artwork({
           maxHeight: elt?.clientHeight,
         }}
         onClick={(e) => {
-          e.stopPropagation();
-          e.nativeEvent.stopImmediatePropagation();
-          onClick();
+          e.stopPropagation()
+          e.nativeEvent.stopImmediatePropagation()
+          onClick()
         }}
         {...rest}
       />
     </div>
-  );
+  )
 }

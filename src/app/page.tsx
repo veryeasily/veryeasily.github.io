@@ -1,4 +1,4 @@
-import Link from "next/link.js";
+import Link from "next/link.js"
 
 export default function HomePage() {
   return (
@@ -20,5 +20,5 @@ export default function HomePage() {
         </p>
       </section>
     </article>
-  );
+  )
 }

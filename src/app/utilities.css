@@ -1,0 +1,13 @@
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+
+    .roboto {
+        font-family: "Roboto", sans-serif;
+    }
+
+    .sankofa {
+        font-family: "Sankofa Display", cursive;
+    }
+}

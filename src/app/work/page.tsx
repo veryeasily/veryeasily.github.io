@@ -1,4 +1,4 @@
-import Link from "next/link.js";
+import Link from "next/link.js"
 
 export default function WorkPage() {
   return (
@@ -14,5 +14,5 @@ export default function WorkPage() {
         </Link>
       </div>
     </div>
-  );
+  )
 }
