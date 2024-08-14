@@ -30,8 +30,8 @@ const LINKS: React.HTMLProps<HTMLAnchorElement>[] = [
 ];
 
 const HEADER_CLASSES = {
-  active: "border-gray-400 text-primary",
-  inactive: "border-white text-primary",
+  active: "border-b-slate-500 text-primary",
+  inactive: "text-primary",
 };
 
 function HeaderLink({
@@ -41,14 +41,15 @@ function HeaderLink({
 }: React.HTMLProps<HTMLAnchorElement>) {
   const isNewTab = target === "_blank";
   const pathname = usePathname();
+  const isActive = pathname === href;
 
   return (
     <Link
       href={href}
       target={target}
       className={clsx(
-        pathname === href ? HEADER_CLASSES.active : HEADER_CLASSES.inactive,
-        "header__link border bg-white px-1.5 py-0.5 hover:border-teal-500 hover:text-teal-500 active:border-teal-400 active:text-teal-400",
+        isActive ? HEADER_CLASSES.active : HEADER_CLASSES.inactive,
+        "header__link border-2 border-white bg-white px-1.5 py-px hover:border-teal-500 hover:text-teal-500 active:border-teal-400 active:text-teal-400",
       )}
     >
       <div className="header__inner-link flex items-center gap-1 text-base leading-none underline md:text-2xl">
