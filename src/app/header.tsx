@@ -30,7 +30,7 @@ const LINKS: React.HTMLProps<HTMLAnchorElement>[] = [
 ];
 
 const HEADER_CLASSES = {
-  active: "border-b-slate-500 text-primary",
+  active: "border-b-primary text-primary",
   inactive: "text-primary",
 };
 
