@@ -38,7 +38,8 @@ const HEADER_CLASSES = {
 function HeaderLink({ children, target, href = "#" }: React.HTMLProps<HTMLAnchorElement>) {
   const isNewTab = target === "_blank"
   const pathname = usePathname()
-  const isActive = pathname === href
+  const isActive = false
+  // const isActive = pathname === href
 
   return (
     <Link
