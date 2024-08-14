@@ -78,7 +78,7 @@ const Header = ({ className, ...rest }: React.HTMLProps<HTMLElement>) => {
 
   return (
     <header
-      className={classes("header shadow-2xl shadow-primary", className)}
+      className={classes("header shadow-2xl shadow-primary z-10", className)}
       ref={headerRef}
       {...rest}
     >
