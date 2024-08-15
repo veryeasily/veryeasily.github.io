@@ -12,7 +12,7 @@ import { useStore } from "@/lib/store.ts"
 const LINKS: React.HTMLProps<HTMLAnchorElement>[] = [
   {
     href: "/",
-    children: "lju.me",
+    children: "home",
   },
   {
     href: "/art",
