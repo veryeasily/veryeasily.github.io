@@ -47,7 +47,7 @@ function HeaderLink({ children, target, href = "#" }: React.HTMLProps<HTMLAnchor
       target={target}
       className={clsx(
         isActive ? HEADER_CLASSES.active : HEADER_CLASSES.inactive,
-        "header_link border-2 border-white bg-white px-1 md:px-2 py-1 md:py-0.5 hover:border-teal-500 hover:text-teal-500 active:border-teal-400 active:text-teal-400",
+        "header_link border border-white bg-white px-1 md:px-2 py-1 md:py-0.5 hover:border-teal-500 hover:text-teal-500 active:border-teal-400 active:text-teal-400",
       )}
     >
       <div className="header_inner-link flex items-center gap-1 text-base leading-none underline md:text-2xl">
