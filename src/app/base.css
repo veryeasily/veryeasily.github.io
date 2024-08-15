@@ -35,6 +35,6 @@
 
     body {
         color: rgb(var(--foreground-rgb));
-        animation: 48s infinite color-cycle;
+        animation: 16s infinite color-cycle;
     }
 }
