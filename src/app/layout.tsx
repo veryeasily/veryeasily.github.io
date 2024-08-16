@@ -23,7 +23,7 @@ export default function RootLayout({
       <body className="layout_body flex min-h-full flex-col gap-8 md:gap-16">
         <Header />
 
-        <main className="layout_main mx-auto flex w-full max-w-screen-sm flex-1 flex-col px-2 md:px-4">
+        <main className="layout_main max-w-lg mx-auto flex-1 w-full flex px-2 md:px-4">
           {children}
         </main>
       </body>
