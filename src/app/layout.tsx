@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="layout h-full">
+    <html lang="en" className="layout h-full" style={inter.style}>
       <body className="layout_body min-h-full gap-8 md:gap-16 flex flex-col">
         <Header />
 
