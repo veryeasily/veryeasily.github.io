@@ -20,12 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="layout h-full">
-      <body className="layout_body flex min-h-full flex-col gap-8 md:gap-16">
+      <body className="layout_body min-h-full gap-8 md:gap-16 flex flex-col">
         <Header />
 
-        <main className="layout_main max-w-lg mx-auto flex-1 w-full flex px-2 md:px-4">
-          {children}
-        </main>
+        <main className="layout_main max-w-lg mx-auto w-full px-2 md:px-4 flex-1">{children}</main>
       </body>
     </html>
   )
