@@ -26,13 +26,11 @@ const LINKS: HeaderLinkProps[] = [
   {
     href: "https://github.com/veryeasily",
     Icon: GithubIcon,
-    target: "_blank",
     children: "code",
   },
   {
     href: "https://soundcloud.com/siiiiinging",
     Icon: SoundcloudIcon,
-    target: "_blank",
     children: "music",
   },
 ]
