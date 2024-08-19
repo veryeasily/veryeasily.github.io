@@ -4,6 +4,10 @@ import * as React from "react"
 import { useEffect, useState } from "react"
 import clsx from "clsx"
 
+/**
+ * We use an irrational number for FAST_INTERVAL_TIME so that it never syncs
+ * with INTERVAL_TIME.
+ */
 const FAST_INTERVAL_TIME = Math.PI * 1000 * (3 / 10)
 const INTERVAL_TIME = 1500
 
