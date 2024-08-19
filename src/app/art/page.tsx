@@ -25,7 +25,7 @@ export default function ArtPage() {
         <AnimatePresence>
           {active && (
             <motion.div
-              className="art-page_backdrop fixed inset-0 bg-black bg-opacity-85 z-10"
+              className="art-page_backdrop fixed inset-0 z-10 bg-black bg-opacity-85"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -34,13 +34,13 @@ export default function ArtPage() {
           )}
         </AnimatePresence>
 
-        {IMG_LIST.map((src) => (
+        {IMG_LIST.map((img) => (
           <Artwork
-            src={src}
-            key={src}
-            active={active === src}
+            src={img.src}
+            key={img.src}
+            active={active === img.src}
             onClick={() => {
-              setActive(src === active ? null : src)
+              setActive(img.src === active ? null : img.src)
             }}
           />
         ))}

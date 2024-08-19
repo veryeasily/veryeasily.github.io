@@ -5,7 +5,7 @@ import Link from "next/link.js"
 import { useEffect, useRef } from "react"
 import { useEvent } from "react-use"
 
-import { classes } from "@/lib/classes.ts"
+import { classes } from "@/lib/styles.ts"
 import { useStore } from "@/lib/store.ts"
 import GithubIcon from "@/assets/github-icon.tsx"
 import SoundcloudIcon from "@/assets/soundcloud-icon.tsx"
