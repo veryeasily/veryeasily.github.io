@@ -4,6 +4,7 @@ import * as React from "react"
 import { useEffect, useState } from "react"
 import clsx from "clsx"
 
+const FAST_INTERVAL_TIME = Math.PI * 1000 * (3 / 10)
 const INTERVAL_TIME = 1500
 
 export const ArtworkContext = React.createContext({
@@ -35,10 +36,6 @@ function makeRandomPosition() {
 }
 
 function makeTransform(position: ReturnType<typeof makeRandomPosition>, active: boolean) {
-  const window = globalThis.window
-  const width = window?.innerWidth || 0
-  const height = window?.innerHeight || 0
-
   if (active) {
     return `translate3d(-50%, -50%, 0)`
   }
@@ -74,6 +71,21 @@ export default function Artwork({
   const position = useRandomPosition()
   const loaded = dimensions.width > 0 && dimensions.height > 0
   const [elt, setElt] = useState<HTMLDivElement | null>(null)
+  const [clickMe, setClickMe] = useState(false)
+
+  useEffect(() => {
+    if (active) return
+
+    const interval = setInterval(() => {
+      const result = Math.random() < 0.2
+      setClickMe(result)
+    }, FAST_INTERVAL_TIME)
+
+    return () => {
+      clearInterval(interval)
+      setClickMe(false)
+    }
+  }, [active])
 
   useEffect(() => {
     if (!elt) {
@@ -116,6 +128,12 @@ export default function Artwork({
         }}
         {...rest}
       />
+
+      {clickMe && (
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black text-4xl font-bold text-red-500 opacity-60">
+          click to zoom!
+        </div>
+      )}
     </div>
   )
 }

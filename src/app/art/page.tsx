@@ -19,7 +19,7 @@ export default function ArtPage() {
   return (
     <div className="art-page">
       <h3 className="text-2xl">artwork here:</h3>
-      <p className="text-xs text-primary">(click to zoom)</p>
+      {/* <p className="text-xs text-primary">(click to zoom)</p> */}
 
       <div style={style} className="js-artwork-container fixed inset-0 m-4 sm:m-16">
         <AnimatePresence>
