@@ -78,6 +78,13 @@ function useRandomPosition() {
   return position
 }
 
+function makeClickMeClass() {
+  const rand = Math.random()
+  if (rand < 5 / 6) return "hidden"
+
+  return randomElement(["text-primary", "text-secondary", "text-tertiary", "text-quaternary"])
+}
+
 export default function Artwork({
   src,
   active = false,
@@ -85,29 +92,22 @@ export default function Artwork({
   ...rest
 }: ArtworkProps) {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
-  const position = useRandomPosition()
   const loaded = dimensions.width > 0 && dimensions.height > 0
+
   const [elt, setElt] = useState<HTMLDivElement | null>(null)
-  const [clickMe, setClickMe] = useState<string | null>(null)
+  const [clickMeClass, setClickMeClass] = useState("hidden")
+  const position = useRandomPosition()
 
   useEffect(() => {
     if (active) return
 
     const interval = setInterval(() => {
-      const result = Math.random() < 1 / 6
-      if (!result) {
-        setClickMe(null)
-        return
-      }
-
-      setClickMe(
-        randomElement(["text-primary", "text-secondary", "text-tertiary", "text-quaternary"]),
-      )
+      setClickMeClass(makeClickMeClass())
     }, FAST_INTERVAL_TIME)
 
     return () => {
       clearInterval(interval)
-      setClickMe(null)
+      setClickMeClass("hidden")
     }
   }, [active])
 
@@ -153,16 +153,14 @@ export default function Artwork({
         {...rest}
       />
 
-      {clickMe && (
-        <div
-          className={clsx(
-            "pointer-events-none absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-center text-6xl font-bold",
-            clickMe,
-          )}
-        >
-          click to zoom!
-        </div>
-      )}
+      <div
+        className={clsx(
+          "pointer-events-none absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-center text-6xl font-bold",
+          clickMeClass,
+        )}
+      >
+        click to zoom!
+      </div>
     </div>
   )
 }

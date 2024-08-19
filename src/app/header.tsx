@@ -87,18 +87,7 @@ const Header = ({ className, ...rest }: React.HTMLProps<HTMLElement>) => {
         ))}
       </div>
 
-      <div className="header_side-links flex flex-1 justify-end gap-1 md:gap-2">
-        {/* {sideLinks.map(({ Icon, href }) => (
-          <a
-            href={href}
-            target="_blank"
-            key={href}
-            className="header_side-link text-cycle block invert hover:text-teal-500"
-          >
-            <Icon className="h-5 w-5 md:h-8 md:w-8" />
-          </a>
-        ))} */}
-      </div>
+      <div className="header_spacer flex-1" />
     </header>
   )
 }
