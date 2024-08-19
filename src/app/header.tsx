@@ -8,6 +8,8 @@ import { useEvent } from "react-use"
 
 import { classes } from "@/lib/classes.ts"
 import { useStore } from "@/lib/store.ts"
+import GithubIcon from "@/assets/github-icon.tsx"
+import SoundcloudIcon from "@/assets/soundcloud-icon.tsx"
 
 const LINKS: React.HTMLProps<HTMLAnchorElement>[] = [
   {
@@ -18,15 +20,33 @@ const LINKS: React.HTMLProps<HTMLAnchorElement>[] = [
     href: "/art",
     children: "art",
   },
+  // {
+  //   href: "https://github.com/veryeasily",
+  //   target: "_blank",
+  //   icon: <GithubIcon className="w-4 h-4" />,
+  //   children: "code",
+  // },
+  // {
+  //   href: "https://soundcloud.com/siiiiinging",
+  //   target: "_blank",
+  //   icon: <SoundcloudIcon className="w-4 h-4" />,
+  //   children: "music",
+  // },
+]
+
+interface SideLink {
+  Icon: React.FC<React.SVGProps<SVGSVGElement>>
+  href: string
+}
+
+const sideLinks: SideLink[] = [
   {
+    Icon: GithubIcon,
     href: "https://github.com/veryeasily",
-    target: "_blank",
-    children: "code",
   },
   {
+    Icon: SoundcloudIcon,
     href: "https://soundcloud.com/siiiiinging",
-    target: "_blank",
-    children: "music",
   },
 ]
 
@@ -36,10 +56,7 @@ const HEADER_CLASSES = {
 }
 
 function HeaderLink({ children, target, href = "#" }: React.HTMLProps<HTMLAnchorElement>) {
-  const isNewTab = target === "_blank"
-  const pathname = usePathname()
   const isActive = false
-  // const isActive = pathname === href
 
   return (
     <Link
@@ -52,9 +69,6 @@ function HeaderLink({ children, target, href = "#" }: React.HTMLProps<HTMLAnchor
     >
       <div className="header_inner-link flex items-center gap-1 text-base leading-none underline md:text-2xl">
         <div className="header_link-text">{children}</div>
-        {isNewTab && (
-          <div className="header_new-tab-link material-symbols--open-in-new relative mt-0.5 text-xs md:mt-1" />
-        )}
       </div>
     </Link>
   )
@@ -79,13 +93,35 @@ const Header = ({ className, ...rest }: React.HTMLProps<HTMLElement>) => {
 
   return (
     <header
-      className={classes("header shadow-2xl shadow-primary z-10", className)}
+      className={classes(
+        "header shadow-2xl shadow-primary z-10 flex items-center justify-between leading-none px-2 md:px-4 py-2",
+        className,
+      )}
       ref={headerRef}
       {...rest}
     >
-      <div className="header_inner mx-auto flex max-w-screen-sm flex-none justify-center gap-1.5 p-2 md:gap-2.5 md:p-4">
+      <div className="header_logo flex-1 flex">
+        {/* <a href="/" className="font-bold text-xl underline flex-none block bg-white p-2">
+          LJU
+        </a> */}
+      </div>
+
+      <div className="header_inner mx-auto flex max-w-screen-sm justify-center gap-2 md:gap-2.5">
         {LINKS.map((props) => (
           <HeaderLink key={props.href} {...props} />
+        ))}
+      </div>
+
+      <div className="header_side-links flex gap-1 flex-1 justify-end">
+        {sideLinks.map(({ Icon, href }) => (
+          <a
+            href={href}
+            target="_blank"
+            key={href}
+            className="header_side-link block bg-white rounded-xl p-1  hover:border-teal-500 hover:text-teal-500 text-primary border border-white"
+          >
+            <Icon className="w-8 h-8" />
+          </a>
         ))}
       </div>
     </header>

@@ -1,8 +1,30 @@
 @tailwind utilities;
 
+@keyframes text-color-cycle {
+    0% {
+        color: theme("colors.tertiary.DEFAULT");
+    }
+    25% {
+        color: theme("colors.quaternary.DEFAULT");
+    }
+    50% {
+        color: theme("colors.primary.DEFAULT");
+    }
+    75% {
+        color: theme("colors.secondary.DEFAULT");
+    }
+    100% {
+        color: theme("colors.tertiary.DEFAULT");
+    }
+}
+
 @layer utilities {
     .text-balance {
         text-wrap: balance;
+    }
+
+    .text-cycle {
+        animation: 8s infinite text-color-cycle ease-out;
     }
 
     .roboto {
