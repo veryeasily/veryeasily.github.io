@@ -2,6 +2,8 @@ import * as React from "react"
 import { useEffect, useState } from "react"
 import clsx from "clsx"
 
+import { randomElement } from "@/lib/functions.ts"
+
 /**
  * We use an irrational number for FAST_INTERVAL_TIME so that it never syncs
  * with INTERVAL_TIME.
@@ -86,19 +88,26 @@ export default function Artwork({
   const position = useRandomPosition()
   const loaded = dimensions.width > 0 && dimensions.height > 0
   const [elt, setElt] = useState<HTMLDivElement | null>(null)
-  const [clickMe, setClickMe] = useState(false)
+  const [clickMe, setClickMe] = useState<string | null>(null)
 
   useEffect(() => {
     if (active) return
 
     const interval = setInterval(() => {
-      const result = Math.random() < 0.2
-      setClickMe(result)
+      const result = Math.random() < 97 / 600
+      if (!result) {
+        setClickMe(null)
+        return
+      }
+
+      setClickMe(
+        randomElement(["text-primary", "text-secondary", "text-tertiary", "text-quaternary"]),
+      )
     }, FAST_INTERVAL_TIME)
 
     return () => {
       clearInterval(interval)
-      setClickMe(false)
+      setClickMe(null)
     }
   }, [active])
 
@@ -145,7 +154,12 @@ export default function Artwork({
       />
 
       {clickMe && (
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black text-4xl font-bold text-red-500 opacity-60">
+        <div
+          className={clsx(
+            "pointer-events-none absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-center text-6xl font-bold",
+            clickMe,
+          )}
+        >
           click to zoom!
         </div>
       )}
