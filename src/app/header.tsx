@@ -2,7 +2,6 @@
 
 import clsx from "clsx"
 import Link from "next/link.js"
-import { usePathname } from "next/navigation.js"
 import { useEffect, useRef } from "react"
 import { useEvent } from "react-use"
 
@@ -88,11 +87,7 @@ const Header = ({ className, ...rest }: React.HTMLProps<HTMLElement>) => {
       ref={headerRef}
       {...rest}
     >
-      <div className="header_logo flex-1 flex">
-        {/* <a href="/" className="font-bold text-xl underline flex-none block bg-white p-2">
-          LJU
-        </a> */}
-      </div>
+      <div className="header_logo flex-1" />
 
       <div className="header_inner mx-auto flex max-w-screen-sm justify-center gap-1 md:gap-2">
         {LINKS.map((props) => (
