@@ -35,37 +35,13 @@ const LINKS: HeaderLinkProps[] = [
   },
 ]
 
-// interface SideLink {
-//   Icon: React.FC<React.SVGProps<SVGSVGElement>>
-//   href: string
-// }
-
-// const sideLinks: SideLink[] = [
-//   {
-//     Icon: SoundcloudIcon,
-//     href: "https://soundcloud.com/siiiiinging",
-//   },
-//   {
-//     Icon: GithubIcon,
-//     href: "https://github.com/veryeasily",
-//   },
-// ]
-
-const HEADER_CLASSES = {
-  active: "border-b-primary text-primary",
-  inactive: "text-primary",
-}
-
 function HeaderLink({ children, target, Icon, href = "#" }: HeaderLinkProps) {
-  const isActive = false
-
   return (
     <Link
       href={href}
       target={target}
       className={clsx(
-        isActive ? HEADER_CLASSES.active : HEADER_CLASSES.inactive,
-        "header_link flex items-center gap-1.5 border border-white bg-white px-1 py-1 hover:border-teal-500 hover:text-teal-500 active:border-teal-400 active:text-teal-400 md:px-2 md:py-1",
+        "header_link flex items-center gap-1.5 border border-white bg-white px-1 py-1 text-primary hover:border-teal-500 hover:text-teal-500 md:px-2 md:py-1",
       )}
     >
       <div className="header_inner-link flex items-center gap-1 text-base leading-none underline md:text-2xl">
