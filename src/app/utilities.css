@@ -2,19 +2,19 @@
 
 @keyframes text-color-cycle {
     0% {
-        color: theme("colors.tertiary.DEFAULT");
-    }
-    25% {
-        color: theme("colors.quaternary.DEFAULT");
-    }
-    50% {
         color: theme("colors.primary.DEFAULT");
     }
-    75% {
+    25% {
         color: theme("colors.secondary.DEFAULT");
     }
-    100% {
+    50% {
         color: theme("colors.tertiary.DEFAULT");
+    }
+    75% {
+        color: theme("colors.quaternary.DEFAULT");
+    }
+    100% {
+        color: theme("colors.primary.DEFAULT");
     }
 }
 
@@ -23,8 +23,12 @@
         text-wrap: balance;
     }
 
+    .bg-cycle {
+        animation: 16s infinite color-cycle ease-out;
+    }
+
     .text-cycle {
-        animation: 12s infinite text-color-cycle ease-out;
+        animation: 16s infinite text-color-cycle ease-out;
     }
 
     .roboto {

@@ -20,10 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="layout h-full" style={inter.style}>
-      <body className="layout_body min-h-full gap-8 md:gap-16 flex flex-col">
+      <body className="layout_body bg-cycle flex min-h-full flex-col gap-8 md:gap-16">
         <Header />
 
-        <main className="layout_main max-w-lg mx-auto w-full px-2 md:px-4 flex-1">{children}</main>
+        <main className="layout_main mx-auto w-full max-w-lg flex-1 px-2 md:px-4">{children}</main>
       </body>
     </html>
   )

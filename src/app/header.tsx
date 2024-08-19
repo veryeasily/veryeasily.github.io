@@ -51,7 +51,7 @@ function HeaderLink({ children, target, href = "#" }: React.HTMLProps<HTMLAnchor
       target={target}
       className={clsx(
         isActive ? HEADER_CLASSES.active : HEADER_CLASSES.inactive,
-        "header_link border border-white bg-white px-1 md:px-2 py-1 md:py-0.5 hover:border-teal-500 hover:text-teal-500 active:border-teal-400 active:text-teal-400",
+        "header_link border border-white bg-white px-1 py-1 hover:border-teal-500 hover:text-teal-500 active:border-teal-400 active:text-teal-400 md:px-2 md:py-0.5",
       )}
     >
       <div className="header_inner-link flex items-center gap-1 text-base leading-none underline md:text-2xl">
@@ -81,7 +81,7 @@ const Header = ({ className, ...rest }: React.HTMLProps<HTMLElement>) => {
   return (
     <header
       className={classes(
-        "header shadow-2xl shadow-primary z-10 flex items-center justify-between leading-none px-1 md:px-2 py-1 md:py-2",
+        "header z-10 flex items-center justify-between px-1 py-1 leading-none shadow-2xl shadow-primary md:px-2 md:py-2",
         className,
       )}
       ref={headerRef}
@@ -95,15 +95,15 @@ const Header = ({ className, ...rest }: React.HTMLProps<HTMLElement>) => {
         ))}
       </div>
 
-      <div className="header_side-links flex gap-1 md:gap-2 flex-1 justify-end">
+      <div className="header_side-links flex flex-1 justify-end gap-1 md:gap-2">
         {sideLinks.map(({ Icon, href }) => (
           <a
             href={href}
             target="_blank"
             key={href}
-            className="header_side-link block hover:text-teal-500 text-primary"
+            className="header_side-link text-cycle block invert hover:text-teal-500"
           >
-            <Icon className="w-5 h-5 md:w-8 md:h-8" />
+            <Icon className="h-5 w-5 md:h-8 md:w-8" />
           </a>
         ))}
       </div>
