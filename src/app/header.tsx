@@ -82,7 +82,7 @@ const Header = ({ className, ...rest }: React.HTMLProps<HTMLElement>) => {
   return (
     <header
       className={classes(
-        "header shadow-2xl shadow-primary z-10 flex items-center justify-between leading-none px-1 md:px-4 py-1 md:py-2",
+        "header shadow-2xl shadow-primary z-10 flex items-center justify-between leading-none px-1 md:px-2 py-1 md:py-2",
         className,
       )}
       ref={headerRef}
@@ -106,7 +106,7 @@ const Header = ({ className, ...rest }: React.HTMLProps<HTMLElement>) => {
             href={href}
             target="_blank"
             key={href}
-            className="header_side-link block p-0.5 md:p-1 hover:text-teal-500 text-primary"
+            className="header_side-link block hover:text-teal-500 text-primary"
           >
             <Icon className="w-5 h-5 md:w-8 md:h-8" />
           </a>
