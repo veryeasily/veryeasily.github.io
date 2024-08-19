@@ -94,7 +94,7 @@ export default function Artwork({
     if (active) return
 
     const interval = setInterval(() => {
-      const result = Math.random() < 97 / 600
+      const result = Math.random() < 1 / 6
       if (!result) {
         setClickMe(null)
         return
