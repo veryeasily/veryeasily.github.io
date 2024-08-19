@@ -24,7 +24,7 @@
     }
 
     .text-cycle {
-        animation: 8s infinite text-color-cycle ease-out;
+        animation: 12s infinite text-color-cycle ease-out;
     }
 
     .roboto {

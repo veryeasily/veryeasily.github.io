@@ -20,18 +20,6 @@ const LINKS: React.HTMLProps<HTMLAnchorElement>[] = [
     href: "/art",
     children: "art",
   },
-  // {
-  //   href: "https://github.com/veryeasily",
-  //   target: "_blank",
-  //   icon: <GithubIcon className="w-4 h-4" />,
-  //   children: "code",
-  // },
-  // {
-  //   href: "https://soundcloud.com/siiiiinging",
-  //   target: "_blank",
-  //   icon: <SoundcloudIcon className="w-4 h-4" />,
-  //   children: "music",
-  // },
 ]
 
 interface SideLink {
@@ -41,12 +29,12 @@ interface SideLink {
 
 const sideLinks: SideLink[] = [
   {
-    Icon: GithubIcon,
-    href: "https://github.com/veryeasily",
-  },
-  {
     Icon: SoundcloudIcon,
     href: "https://soundcloud.com/siiiiinging",
+  },
+  {
+    Icon: GithubIcon,
+    href: "https://github.com/veryeasily",
   },
 ]
 
@@ -94,7 +82,7 @@ const Header = ({ className, ...rest }: React.HTMLProps<HTMLElement>) => {
   return (
     <header
       className={classes(
-        "header shadow-2xl shadow-primary z-10 flex items-center justify-between leading-none px-2 md:px-4 py-2",
+        "header shadow-2xl shadow-primary z-10 flex items-center justify-between leading-none px-1 md:px-4 py-1 md:py-2",
         className,
       )}
       ref={headerRef}
@@ -106,21 +94,21 @@ const Header = ({ className, ...rest }: React.HTMLProps<HTMLElement>) => {
         </a> */}
       </div>
 
-      <div className="header_inner mx-auto flex max-w-screen-sm justify-center gap-2 md:gap-2.5">
+      <div className="header_inner mx-auto flex max-w-screen-sm justify-center gap-1 md:gap-2">
         {LINKS.map((props) => (
           <HeaderLink key={props.href} {...props} />
         ))}
       </div>
 
-      <div className="header_side-links flex gap-1 flex-1 justify-end">
+      <div className="header_side-links flex gap-1 md:gap-2 flex-1 justify-end">
         {sideLinks.map(({ Icon, href }) => (
           <a
             href={href}
             target="_blank"
             key={href}
-            className="header_side-link block bg-white rounded-xl p-1  hover:border-teal-500 hover:text-teal-500 text-primary border border-white"
+            className="header_side-link block p-0.5 md:p-1 hover:text-teal-500 text-primary"
           >
-            <Icon className="w-8 h-8" />
+            <Icon className="w-5 h-5 md:w-8 md:h-8" />
           </a>
         ))}
       </div>
