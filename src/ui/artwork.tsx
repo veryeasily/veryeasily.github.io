@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 import { useEffect, useState } from "react"
 import clsx from "clsx"
@@ -44,11 +42,24 @@ function makeTransform(position: ReturnType<typeof makeRandomPosition>, active: 
     return `translate3d(-50%, -50%, 0)`
   }
 
-  return `
-    translate3d(${position.x}px, ${position.y}px, ${position.z}px)
-    rotate3d(${position.rotateX}, ${position.rotateY}, ${position.rotateZ}, ${position.rotateDeg}deg)
-    scale(0.5)
+  const translate = `
+    translate3d(
+      ${position.x}px,
+      ${position.y}px,
+      ${position.z}px
+    )
   `
+
+  const rotate = `
+    rotate3d(
+      ${position.rotateX},
+      ${position.rotateY},
+      ${position.rotateZ},
+      ${position.rotateDeg}deg
+    )
+  `
+
+  return `${translate} ${rotate} scale(0.5)`
 }
 
 function useRandomPosition() {
