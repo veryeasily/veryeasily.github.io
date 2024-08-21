@@ -2,7 +2,8 @@ import * as React from "react"
 import { useEffect, useState } from "react"
 import clsx from "clsx"
 
-import { randomElement } from "@/lib/functions.ts"
+import { randomElement, sampleWeibull } from "@/lib/functions.ts"
+import { useWeibullInterval } from "@/lib/hooks.ts"
 
 /**
  * We use an irrational number for FAST_INTERVAL_TIME so that it never syncs
@@ -10,6 +11,8 @@ import { randomElement } from "@/lib/functions.ts"
  */
 const FAST_INTERVAL_TIME = Math.PI * 1000 * (3 / 10)
 const INTERVAL_TIME = 1500
+
+const CLICK_ME_CLASSES = ["text-primary", "text-secondary", "text-tertiary", "text-quaternary"]
 
 export const ArtworkContext = React.createContext({
   width: 0,
@@ -98,18 +101,58 @@ export default function Artwork({
   const [clickMeClass, setClickMeClass] = useState("hidden")
   const position = useRandomPosition()
 
-  useEffect(() => {
-    if (active) return
+  // useEffect(() => {
+  //   if (active) return
 
-    const interval = setInterval(() => {
-      setClickMeClass(makeClickMeClass())
-    }, FAST_INTERVAL_TIME)
+  //   const interval = setInterval(() => {
+  //     setClickMeClass(makeClickMeClass())
+  //   }, FAST_INTERVAL_TIME)
 
-    return () => {
-      clearInterval(interval)
-      setClickMeClass("hidden")
-    }
-  }, [active])
+  //   return () => {
+  //     clearInterval(interval)
+  //     setClickMeClass("hidden")
+  //   }
+  // }, [active])
+
+  useWeibullInterval(
+    () => {
+      if (active) return
+
+      let timeout: ReturnType<typeof setTimeout> | null = null
+      setClickMeClass(randomElement(CLICK_ME_CLASSES))
+
+      timeout = setTimeout(() => {
+        setClickMeClass("hidden")
+      }, 100)
+
+      return () => {
+        if (timeout != null) {
+          clearTimeout(timeout)
+        }
+      }
+    },
+    2000,
+    0.1,
+    [active],
+  )
+
+  // useEffect(() => {
+  //   if (active) return
+
+  //   const lambda = 2
+  //   const k = 0.5
+  //   const timeout = setTimeout(
+  //     () => {
+  //       setClickMeClass(makeClickMeClass())
+  //     },
+  //     sampleWeibull(lambda, k),
+  //   )
+
+  //   return () => {
+  //     clearInterval(timeout)
+  //     setClickMeClass("hidden")
+  //   }
+  // }, [active])
 
   useEffect(() => {
     if (!elt) {
