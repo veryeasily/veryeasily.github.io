@@ -4,7 +4,7 @@ import clsx from "clsx"
 import { useState } from "react"
 
 import Artwork from "@/ui/artwork"
-import { IMG_LIST } from "@/lib/constants.ts"
+import { ART_PORTFOLIO } from "@/lib/constants.ts"
 import { useStore } from "@/lib/store.ts"
 import { useWindowSize } from "react-use"
 import { AnimatePresence, motion } from "framer-motion"
@@ -34,7 +34,7 @@ export default function ArtPage() {
           )}
         </AnimatePresence>
 
-        {IMG_LIST.map((img) => (
+        {ART_PORTFOLIO.map((img) => (
           <Artwork
             src={img.src}
             key={img.src}

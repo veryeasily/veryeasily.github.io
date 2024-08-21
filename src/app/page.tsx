@@ -1,6 +1,6 @@
 import Link from "next/link.js"
 
-import logo from "@/assets/logo.png"
+import { LOGO, RESUME_LINK } from "@/lib/constants.ts"
 
 export default function HomePage() {
   return (
@@ -9,16 +9,12 @@ export default function HomePage() {
         <div className="flex-1">
           <h2 className="text-2xl">hey!!</h2>
 
-          <div className="text-base mt-2">
+          <div className="mt-2 text-base">
             <p>this is where i put stuff i do!</p>
 
             <p>
               you can see my resume{" "}
-              <Link
-                href="https://drive.google.com/file/d/15eq-Ec4faLtWqT8hZ68_YsUuEYIuiSae/view?usp=sharing"
-                className="text-primary underline"
-                target="_blank"
-              >
+              <Link href={RESUME_LINK} className="text-primary underline" target="_blank">
                 here
               </Link>
             </p>
@@ -26,9 +22,9 @@ export default function HomePage() {
         </div>
 
         <img
-          src={logo.src}
+          src={LOGO.src}
           alt="logo"
-          className="w-24 h-24 md:w-40 md:h-40 flex-none block rounded-full"
+          className="block h-24 w-24 flex-none rounded-full md:h-40 md:w-40"
         />
       </section>
     </article>

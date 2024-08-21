@@ -5,8 +5,9 @@ import portfolio4 from "@/assets/images/portfolio-4-beach.jpg"
 import portfolio5 from "@/assets/images/portfolio-5-love.jpg"
 import portfolio6 from "@/assets/images/portfolio-6-this-is-not-an-idea.jpg"
 import portfolio7 from "@/assets/images/portfolio-7-untited.jpg"
+import logo from "@/assets/logo.png"
 
-export const IMG_LIST = [
+export const ART_PORTFOLIO = [
   portfolio1,
   portfolio2,
   portfolio3,
@@ -15,3 +16,8 @@ export const IMG_LIST = [
   portfolio6,
   portfolio7,
 ]
+
+export const LOGO = logo
+
+export const RESUME_LINK =
+  "https://drive.google.com/file/d/15eq-Ec4faLtWqT8hZ68_YsUuEYIuiSae/view?usp=sharing"
