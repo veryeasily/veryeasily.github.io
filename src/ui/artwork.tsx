@@ -1,8 +1,8 @@
 import * as React from "react"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import clsx from "clsx"
 
-import { randomElement, sampleWeibull } from "@/lib/functions.ts"
+import { randomElement, sampleRandomWeibull } from "@/lib/functions.ts"
 import { useWeibullInterval } from "@/lib/hooks.ts"
 
 /**
@@ -11,6 +11,11 @@ import { useWeibullInterval } from "@/lib/hooks.ts"
  */
 const FAST_INTERVAL_TIME = Math.PI * 1000 * (3 / 10)
 const INTERVAL_TIME = 1500
+
+// The weibull distribution parameters for the "click me" text
+const W_SCALE = 5000
+const W_SHAPE = 2 / 5
+const W_OFFSET = 500
 
 const CLICK_ME_CLASSES = ["text-primary", "text-secondary", "text-tertiary", "text-quaternary"]
 
@@ -26,7 +31,7 @@ export interface ArtworkProps {
   [key: string]: any
 }
 
-function makeRandomPosition() {
+const makeRandomPosition = () => {
   // need to dance around server-side rendering here
   const window = globalThis.window
   const width = window?.innerWidth || 0
@@ -42,7 +47,7 @@ function makeRandomPosition() {
   }
 }
 
-function makeTransform(position: ReturnType<typeof makeRandomPosition>, active: boolean) {
+const makeTransform = (position: ReturnType<typeof makeRandomPosition>, active: boolean) => {
   if (active) {
     return `translate3d(-50%, -50%, 0)`
   }
@@ -67,7 +72,7 @@ function makeTransform(position: ReturnType<typeof makeRandomPosition>, active: 
   return `${translate} ${rotate} scale(0.5)`
 }
 
-function useRandomPosition() {
+const useRandomPosition = () => {
   const [position, setPosition] = useState(() => makeRandomPosition())
 
   useEffect(() => {
@@ -81,11 +86,36 @@ function useRandomPosition() {
   return position
 }
 
-function makeClickMeClass() {
-  const rand = Math.random()
-  if (rand < 5 / 6) return "hidden"
+/**
+ * Generates random classes for the "click me" text. The timing of the random
+ * generation is done using a Weibull distribution.
+ *
+ * @param disabled If we should disable the "click me" text.
+ * @returns The random class to be used.
+ */
+const useClickMeClass = (disabled: boolean) => {
+  const [clickMeClass, setClickMeClass] = useState("hidden")
 
-  return randomElement(["text-primary", "text-secondary", "text-tertiary", "text-quaternary"])
+  const weibullHandler = useCallback(() => {
+    if (disabled) return
+
+    const randClass = randomElement(CLICK_ME_CLASSES)
+    setClickMeClass(randClass)
+
+    const timeout = setTimeout(() => {
+      setClickMeClass("hidden")
+    }, W_OFFSET + 500)
+
+    return () => {
+      if (timeout != null) {
+        clearTimeout(timeout)
+      }
+    }
+  }, [disabled])
+
+  useWeibullInterval(weibullHandler, W_SCALE, W_SHAPE, [disabled], W_OFFSET)
+
+  return clickMeClass
 }
 
 export default function Artwork({
@@ -98,61 +128,8 @@ export default function Artwork({
   const loaded = dimensions.width > 0 && dimensions.height > 0
 
   const [elt, setElt] = useState<HTMLDivElement | null>(null)
-  const [clickMeClass, setClickMeClass] = useState("hidden")
+  const clickMeClass = useClickMeClass(active)
   const position = useRandomPosition()
-
-  // useEffect(() => {
-  //   if (active) return
-
-  //   const interval = setInterval(() => {
-  //     setClickMeClass(makeClickMeClass())
-  //   }, FAST_INTERVAL_TIME)
-
-  //   return () => {
-  //     clearInterval(interval)
-  //     setClickMeClass("hidden")
-  //   }
-  // }, [active])
-
-  useWeibullInterval(
-    () => {
-      if (active) return
-
-      let timeout: ReturnType<typeof setTimeout> | null = null
-      setClickMeClass(randomElement(CLICK_ME_CLASSES))
-
-      timeout = setTimeout(() => {
-        setClickMeClass("hidden")
-      }, 100)
-
-      return () => {
-        if (timeout != null) {
-          clearTimeout(timeout)
-        }
-      }
-    },
-    2000,
-    0.1,
-    [active],
-  )
-
-  // useEffect(() => {
-  //   if (active) return
-
-  //   const lambda = 2
-  //   const k = 0.5
-  //   const timeout = setTimeout(
-  //     () => {
-  //       setClickMeClass(makeClickMeClass())
-  //     },
-  //     sampleWeibull(lambda, k),
-  //   )
-
-  //   return () => {
-  //     clearInterval(timeout)
-  //     setClickMeClass("hidden")
-  //   }
-  // }, [active])
 
   useEffect(() => {
     if (!elt) {
