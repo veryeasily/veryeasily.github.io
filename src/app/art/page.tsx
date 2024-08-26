@@ -14,13 +14,13 @@ interface ZoomItemState {
   color: string
 }
 
-const INTERVAL = Math.PI * 1000 * (2 / 3)
+const INTERVAL = Math.PI * 1000 * (4 / 3)
 const ZOOM_INFO_CLASSES = ["text-primary", "text-secondary", "text-tertiary", "text-quaternary"]
 
 function makeZoomItems(): ZoomItemState[] {
   let artworks = ART_PORTFOLIO.slice()
   const results = []
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 4; i++) {
     const color = randomElement(ZOOM_INFO_CLASSES)
     const src = randomElement(artworks).src
     artworks = artworks.filter((img) => img.src !== src)
@@ -39,7 +39,11 @@ export default function ArtPage() {
 
   useEffect(() => {
     const int = setInterval(() => {
-      setZoomItems(makeZoomItems())
+      if (zoomItems.length) {
+        setZoomItems([])
+      } else {
+        setZoomItems(makeZoomItems())
+      }
     }, INTERVAL)
 
     return () => clearInterval(int)
