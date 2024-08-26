@@ -9,12 +9,10 @@ export const ArtworkContext = React.createContext({
   height: 0,
 })
 
-export interface ArtworkProps {
+export interface ArtworkProps extends React.HTMLProps<HTMLImageElement> {
   src: string
   active?: boolean
   onClick?: () => void
-  zoomInfoClass: string
-  [key: string]: any
 }
 
 function makeRandomPosition() {
@@ -72,17 +70,23 @@ function useRandomPosition() {
   return position
 }
 
-const ZOOM_INFO_CLASSES = [
-  "hidden",
-  "text-primary",
-  "text-secondary",
-  "text-tertiary",
-  "text-quaternary",
-]
+export function ArtworkZoomInfo({ className, ...rest }: React.HTMLProps<HTMLDivElement>) {
+  return (
+    <div
+      className={clsx(
+        "pointer-events-none absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-center text-6xl font-bold",
+        className,
+      )}
+      {...rest}
+    >
+      click to zoom!
+    </div>
+  )
+}
 
 export default function Artwork({
   src,
-  zoomInfoClass,
+  children,
   active = false,
   onClick = () => {},
   ...rest
@@ -135,14 +139,7 @@ export default function Artwork({
         {...rest}
       />
 
-      <div
-        className={clsx(
-          "pointer-events-none absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-center text-6xl font-bold",
-          active ? "hidden" : zoomInfoClass,
-        )}
-      >
-        click to zoom!
-      </div>
+      {children}
     </div>
   )
 }

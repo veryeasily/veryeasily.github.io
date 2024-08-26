@@ -6,7 +6,7 @@ import { useWindowSize } from "react-use"
 
 import { ART_PORTFOLIO } from "@/lib/constants.ts"
 import { useStore } from "@/lib/store.ts"
-import Artwork from "@/ui/artwork.tsx"
+import Artwork, { ArtworkZoomInfo } from "@/ui/artwork.tsx"
 import { randomElement } from "@/lib/functions.ts"
 
 interface ClickToZoomState {
@@ -23,7 +23,7 @@ function makeClickToZoomState(): ClickToZoomState {
 }
 
 export default function ArtPage() {
-  const [active, setActive] = useState<string | null>(null)
+  const [activeSrc, setActiveSrc] = useState<string | null>(null)
   const store = useStore()
   const size = useWindowSize()
   const isMobile = size.width < 640
@@ -47,28 +47,35 @@ export default function ArtPage() {
 
       <div style={style} className="js-artwork-container fixed inset-0 m-4 sm:m-16">
         <AnimatePresence>
-          {active && (
+          {activeSrc && (
             <motion.div
               className="art-page_backdrop fixed inset-0 z-10 bg-black bg-opacity-85"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setActive(null)}
+              onClick={() => setActiveSrc(null)}
             />
           )}
         </AnimatePresence>
 
-        {ART_PORTFOLIO.map((img) => (
-          <Artwork
-            src={img.src}
-            key={img.src}
-            active={active === img.src}
-            zoomInfoClass={clickToZoom.src === img.src ? clickToZoom.color : "hidden"}
-            onClick={() => {
-              setActive(img.src === active ? null : img.src)
-            }}
-          />
-        ))}
+        {ART_PORTFOLIO.map((img) => {
+          const active = activeSrc === img.src
+          const hasClickToZoom = clickToZoom.src === img.src
+          return (
+            <Artwork
+              src={img.src}
+              key={img.src}
+              active={activeSrc === img.src}
+              onClick={() => {
+                setActiveSrc(active ? null : img.src)
+              }}
+            >
+              <ArtworkZoomInfo
+                className={!active && hasClickToZoom ? clickToZoom.color : "hidden"}
+              />
+            </Artwork>
+          )
+        })}
       </div>
     </div>
   )
