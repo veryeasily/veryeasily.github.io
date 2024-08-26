@@ -95,7 +95,7 @@ export default function Artwork({
   const loaded = dimensions.width > 0 && dimensions.height > 0
 
   const [elt, setElt] = useState<HTMLDivElement | null>(null)
-  const [clickMeClass, setClickMeClass] = useState(makeClickMeClass())
+  const [clickMeClass, setClickMeClass] = useState(() => makeClickMeClass())
   const position = useRandomPosition()
 
   useEffect(() => {
@@ -107,14 +107,13 @@ export default function Artwork({
 
     return () => {
       clearInterval(interval)
-      setClickMeClass(makeClickMeClass())
     }
   }, [active])
 
   useEffect(() => {
-    if (!elt) {
-      setElt(document.querySelector(".js-artwork-container") as HTMLDivElement)
-    }
+    if (elt) return
+
+    setElt(document.querySelector(".js-artwork-container") as HTMLDivElement)
   }, [elt])
 
   useEffect(() => {
