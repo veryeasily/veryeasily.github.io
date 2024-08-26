@@ -16,10 +16,16 @@ interface ClickToZoomState {
 
 const ZOOM_INFO_CLASSES = ["text-primary", "text-secondary", "text-tertiary", "text-quaternary"]
 
-function makeClickToZoomState(): ClickToZoomState {
-  const color = randomElement(ZOOM_INFO_CLASSES)
-  const src = randomElement(ART_PORTFOLIO).src
-  return { src, color }
+function makeClickToZoomState(): ClickToZoomState[] {
+  let artworks = ART_PORTFOLIO.slice()
+  const results = []
+  for (let i = 0; i < 2; i++) {
+    const color = randomElement(ZOOM_INFO_CLASSES)
+    const src = randomElement(artworks).src
+    artworks = artworks.filter((img) => img.src !== src)
+    results.push({ src, color })
+  }
+  return results
 }
 
 export default function ArtPage() {
@@ -60,7 +66,7 @@ export default function ArtPage() {
 
         {ART_PORTFOLIO.map((img) => {
           const active = activeSrc === img.src
-          const hasClickToZoom = clickToZoom.src === img.src
+          const ctz = clickToZoom.find((ctz) => ctz.src === img.src)
           return (
             <Artwork
               src={img.src}
@@ -70,9 +76,7 @@ export default function ArtPage() {
                 setActiveSrc(active ? null : img.src)
               }}
             >
-              <ArtworkZoomInfo
-                className={!active && hasClickToZoom ? clickToZoom.color : "hidden"}
-              />
+              <ArtworkZoomInfo className={!active && ctz ? ctz.color : "hidden"} />
             </Artwork>
           )
         })}
