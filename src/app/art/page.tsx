@@ -64,7 +64,7 @@ export default function ArtPage() {
 
         {ART_PORTFOLIO.map((img) => {
           const active = activeSrc === img.src
-          const ctz = zoomItems.find((ctz) => ctz.src === img.src)
+          const item = zoomItems.find((ctz) => ctz.src === img.src)
           return (
             <Artwork
               src={img.src}
@@ -74,7 +74,7 @@ export default function ArtPage() {
                 setActiveSrc(active ? null : img.src)
               }}
             >
-              <ArtworkZoomInfo className={!active && ctz ? ctz.color : "hidden"} />
+              <ArtworkZoomInfo className={!active && item ? item.color : "hidden"} />
             </Artwork>
           )
         })}
