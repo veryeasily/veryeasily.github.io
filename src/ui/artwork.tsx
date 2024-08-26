@@ -8,7 +8,7 @@ import { randomElement } from "@/lib/functions.ts"
  * We use an irrational number for FAST_INTERVAL_TIME so that it never syncs
  * with INTERVAL_TIME.
  */
-const FAST_INTERVAL_TIME = Math.PI * 1000 * (3 / 10)
+const FAST_INTERVAL_TIME = Math.PI * 1000 * (1 / 2)
 const INTERVAL_TIME = 1500
 
 export const ArtworkContext = React.createContext({
@@ -80,7 +80,7 @@ function useRandomPosition() {
 
 function makeClickMeClass() {
   const rand = Math.random()
-  if (rand < 5 / 6) return "hidden"
+  if (rand < 7 / 8) return "hidden"
 
   return randomElement(["text-primary", "text-secondary", "text-tertiary", "text-quaternary"])
 }
