@@ -17,7 +17,7 @@ interface ZoomItemState {
 const INTERVAL = Math.PI * 1000 * (4 / 3)
 const ZOOM_INFO_CLASSES = ["text-primary", "text-secondary", "text-tertiary", "text-quaternary"]
 
-function makeZoomItems(): ZoomItemState[] {
+const makeZoomItems = (): ZoomItemState[] => {
   let artworks = ART_PORTFOLIO.slice()
   const results = []
   for (let i = 0; i < 4; i++) {
@@ -29,12 +29,7 @@ function makeZoomItems(): ZoomItemState[] {
   return results
 }
 
-export default function ArtPage() {
-  const [activeSrc, setActiveSrc] = useState<string | null>(null)
-  const store = useStore()
-  const size = useWindowSize()
-  const isMobile = size.width < 640
-  const style = { marginTop: store.headerHeight + (isMobile ? 16 : 64) }
+const useZoomItems = () => {
   const [zoomItems, setZoomItems] = useState(() => makeZoomItems())
 
   useEffect(() => {
@@ -46,8 +41,21 @@ export default function ArtPage() {
       }
     }, INTERVAL)
 
-    return () => clearInterval(int)
-  })
+    return () => {
+      clearInterval(int)
+    }
+  }, [zoomItems])
+
+  return zoomItems
+}
+
+export default function ArtPage() {
+  const [activeSrc, setActiveSrc] = useState<string | null>(null)
+  const store = useStore()
+  const size = useWindowSize()
+  const isMobile = size.width < 640
+  const style = { marginTop: store.headerHeight + (isMobile ? 16 : 64) }
+  const zoomItems = useZoomItems()
 
   return (
     <div className="art-page">
@@ -68,7 +76,7 @@ export default function ArtPage() {
 
         {ART_PORTFOLIO.map((img) => {
           const active = activeSrc === img.src
-          const item = zoomItems.find((ctz) => ctz.src === img.src)
+          const item = zoomItems.find((zi) => zi.src === img.src)
           return (
             <Artwork
               src={img.src}

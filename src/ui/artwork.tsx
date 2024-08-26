@@ -74,7 +74,7 @@ export function ArtworkZoomInfo({ className, ...rest }: React.HTMLProps<HTMLDivE
   return (
     <div
       className={clsx(
-        "pointer-events-none absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-center text-6xl font-bold",
+        "pointer-events-none absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-center text-5xl font-bold",
         className,
       )}
       {...rest}
