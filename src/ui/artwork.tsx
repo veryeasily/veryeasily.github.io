@@ -2,13 +2,6 @@ import * as React from "react"
 import { useEffect, useState } from "react"
 import clsx from "clsx"
 
-import { randomElement } from "@/lib/functions.ts"
-
-/**
- * We use an irrational number for FAST_INTERVAL_TIME so that it never syncs
- * with INTERVAL_TIME.
- */
-const FAST_INTERVAL_TIME = Math.PI * 1000 * (2 / 3)
 const INTERVAL_TIME = 1500
 
 export const ArtworkContext = React.createContext({
@@ -20,6 +13,7 @@ export interface ArtworkProps {
   src: string
   active?: boolean
   onClick?: () => void
+  zoomInfoClass: string
   [key: string]: any
 }
 
@@ -78,15 +72,17 @@ function useRandomPosition() {
   return position
 }
 
-function makeClickMeClass() {
-  const rand = Math.random()
-  if (rand < 7 / 8) return "hidden"
-
-  return randomElement(["text-primary", "text-secondary", "text-tertiary", "text-quaternary"])
-}
+const ZOOM_INFO_CLASSES = [
+  "hidden",
+  "text-primary",
+  "text-secondary",
+  "text-tertiary",
+  "text-quaternary",
+]
 
 export default function Artwork({
   src,
+  zoomInfoClass,
   active = false,
   onClick = () => {},
   ...rest
@@ -95,20 +91,7 @@ export default function Artwork({
   const loaded = dimensions.width > 0 && dimensions.height > 0
 
   const [elt, setElt] = useState<HTMLDivElement | null>(null)
-  const [clickMeClass, setClickMeClass] = useState(() => makeClickMeClass())
   const position = useRandomPosition()
-
-  useEffect(() => {
-    if (active) return
-
-    const interval = setInterval(() => {
-      setClickMeClass(makeClickMeClass())
-    }, FAST_INTERVAL_TIME)
-
-    return () => {
-      clearInterval(interval)
-    }
-  }, [active])
 
   useEffect(() => {
     if (elt) return
@@ -155,7 +138,7 @@ export default function Artwork({
       <div
         className={clsx(
           "pointer-events-none absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-center text-6xl font-bold",
-          active ? "hidden" : clickMeClass,
+          active ? "hidden" : zoomInfoClass,
         )}
       >
         click to zoom!
