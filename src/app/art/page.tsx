@@ -9,14 +9,15 @@ import { useStore } from "@/lib/store.ts"
 import Artwork, { ArtworkZoomInfo } from "@/ui/artwork.tsx"
 import { randomElement } from "@/lib/functions.ts"
 
-interface ClickToZoomState {
+interface ZoomItemState {
   src: string
   color: string
 }
 
+const INTERVAL = Math.PI * 1000 * (2 / 3)
 const ZOOM_INFO_CLASSES = ["text-primary", "text-secondary", "text-tertiary", "text-quaternary"]
 
-function makeClickToZoomState(): ClickToZoomState[] {
+function makeZoomItems(): ZoomItemState[] {
   let artworks = ART_PORTFOLIO.slice()
   const results = []
   for (let i = 0; i < 2; i++) {
@@ -34,15 +35,12 @@ export default function ArtPage() {
   const size = useWindowSize()
   const isMobile = size.width < 640
   const style = { marginTop: store.headerHeight + (isMobile ? 16 : 64) }
-  const [clickToZoom, setClickToZoom] = useState(() => makeClickToZoomState())
+  const [zoomItems, setZoomItems] = useState(() => makeZoomItems())
 
   useEffect(() => {
-    const int = setInterval(
-      () => {
-        setClickToZoom(makeClickToZoomState())
-      },
-      Math.PI * 1000 * (2 / 3),
-    )
+    const int = setInterval(() => {
+      setZoomItems(makeZoomItems())
+    }, INTERVAL)
 
     return () => clearInterval(int)
   })
@@ -66,7 +64,7 @@ export default function ArtPage() {
 
         {ART_PORTFOLIO.map((img) => {
           const active = activeSrc === img.src
-          const ctz = clickToZoom.find((ctz) => ctz.src === img.src)
+          const ctz = zoomItems.find((ctz) => ctz.src === img.src)
           return (
             <Artwork
               src={img.src}
