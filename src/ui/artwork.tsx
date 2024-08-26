@@ -8,7 +8,7 @@ import { randomElement } from "@/lib/functions.ts"
  * We use an irrational number for FAST_INTERVAL_TIME so that it never syncs
  * with INTERVAL_TIME.
  */
-const FAST_INTERVAL_TIME = Math.PI * 1000 * (1 / 2)
+const FAST_INTERVAL_TIME = Math.PI * 1000 * (2 / 3)
 const INTERVAL_TIME = 1500
 
 export const ArtworkContext = React.createContext({
@@ -95,7 +95,7 @@ export default function Artwork({
   const loaded = dimensions.width > 0 && dimensions.height > 0
 
   const [elt, setElt] = useState<HTMLDivElement | null>(null)
-  const [clickMeClass, setClickMeClass] = useState("hidden")
+  const [clickMeClass, setClickMeClass] = useState(makeClickMeClass())
   const position = useRandomPosition()
 
   useEffect(() => {
@@ -107,7 +107,7 @@ export default function Artwork({
 
     return () => {
       clearInterval(interval)
-      setClickMeClass("hidden")
+      setClickMeClass(makeClickMeClass())
     }
   }, [active])
 
@@ -156,7 +156,7 @@ export default function Artwork({
       <div
         className={clsx(
           "pointer-events-none absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-center text-6xl font-bold",
-          clickMeClass,
+          active ? "hidden" : clickMeClass,
         )}
       >
         click to zoom!
