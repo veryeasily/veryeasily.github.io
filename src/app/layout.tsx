@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "lju.me",
-  description: "this is where i put stuff i do!",
+  description: "my personal projects and portfolio!",
   metadataBase: new URL("https://lju.me"),
   // robots: "noindex, nofollow",
 }
