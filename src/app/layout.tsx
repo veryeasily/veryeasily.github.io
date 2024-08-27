@@ -8,9 +8,9 @@ import Header from "@/app/header"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Luke Underwood",
+  title: "lju.me",
   description: "this is where i put stuff i do!",
-  robots: "noindex, nofollow",
+  // robots: "noindex, nofollow",
 }
 
 export default function RootLayout({
