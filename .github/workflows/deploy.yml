@@ -27,6 +27,11 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    # Set node to run in production mode
+    env:
+      NODE_ENV: production
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
