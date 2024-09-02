@@ -2,7 +2,8 @@ import * as React from "react"
 import { useEffect, useState } from "react"
 import clsx from "clsx"
 
-const INTERVAL_TIME = 2000
+const FIRST_TIMEOUT = 500
+const INTERVAL_TIME = 2500
 
 export const ArtworkContext = React.createContext({
   width: 0,
@@ -57,15 +58,31 @@ function makeTransform(position: ReturnType<typeof makeRandomPosition>, active: 
 }
 
 function useRandomPosition() {
+  const [first, setFirst] = useState(true)
   const [position, setPosition] = useState(() => makeRandomPosition())
 
   useEffect(() => {
+    let timeout: NodeJS.Timeout
+
+    if (first) {
+      setFirst(false)
+      setTimeout(() => {
+        setPosition(makeRandomPosition())
+      }, FIRST_TIMEOUT)
+    }
+
+    return () => clearTimeout(timeout)
+  }, [first])
+
+  useEffect(() => {
+    if (first) return
+
     const interval = setInterval(() => {
       setPosition(makeRandomPosition())
     }, INTERVAL_TIME)
 
     return () => clearInterval(interval)
-  }, [])
+  }, [first])
 
   return position
 }
