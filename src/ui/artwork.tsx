@@ -2,7 +2,7 @@ import * as React from "react"
 import { useEffect, useState } from "react"
 import clsx from "clsx"
 
-const INTERVAL_TIME = 1500
+const INTERVAL_TIME = 2000
 
 export const ArtworkContext = React.createContext({
   width: 0,
