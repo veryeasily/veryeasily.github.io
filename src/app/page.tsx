@@ -14,7 +14,7 @@ export default function HomePage() {
 
             <p>
               you can see my resume{" "}
-              <Link href={RESUME_LINK} className="text-primary underline" target="_blank">
+              <Link href={RESUME_LINK} className="text-primary underline hover:text-teal-500" target="_blank">
                 here
               </Link>
             </p>
