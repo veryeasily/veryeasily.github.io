@@ -19,8 +19,11 @@ export interface ArtworkProps extends React.HTMLProps<HTMLImageElement> {
 function makeRandomPosition() {
   // need to dance around server-side rendering here
   const window = globalThis.window
-  const width = window?.innerWidth || 0
-  const height = window?.innerHeight || 0
+  // spread artworks across the container (not the window), since the container
+  // is inset by margins and pushed down below the header
+  const container = window?.document.querySelector(".js-artwork-container")
+  const width = container?.clientWidth || window?.innerWidth || 0
+  const height = container?.clientHeight || window?.innerHeight || 0
   return {
     x: Math.floor(Math.random() * width) - width / 2,
     y: Math.floor(Math.random() * height) - height / 2,
@@ -37,7 +40,10 @@ function makeTransform(position: ReturnType<typeof makeRandomPosition>, active: 
     return `translate3d(-50%, -50%, 0)`
   }
 
+  // translate(-50%, -50%) puts the artwork's center on the container's center
+  // (it is anchored at left-1/2 top-1/2), then the random offset is applied
   const translate = `
+    translate(-50%, -50%)
     translate3d(
       ${position.x}px,
       ${position.y}px,
@@ -135,7 +141,8 @@ export default function Artwork({
     <div
       className={clsx(
         "absolute cursor-pointer duration-1000",
-        active ? "left-1/2 top-1/2 z-50" : "left-0 top-0",
+        "left-1/2 top-1/2",
+        active && "z-50",
       )}
       style={{
         transform: makeTransform(position, active),
