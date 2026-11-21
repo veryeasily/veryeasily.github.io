@@ -86,8 +86,6 @@ const Header = ({ className, ...rest }: React.HTMLProps<HTMLElement>) => {
           <HeaderLink key={props.href} {...props} />
         ))}
       </div>
-
-      <div className="header_spacer flex-1" />
     </header>
   )
 }
