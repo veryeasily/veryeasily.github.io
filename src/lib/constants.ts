@@ -20,4 +20,4 @@ export const ART_PORTFOLIO = [
 export const LOGO = logo
 
 export const RESUME_LINK =
-  "https://docs.google.com/document/d/1IuoAxhkpV2xXZJXMMa8A30T5lRndTvKEque9X5mW-c0/edit?usp=sharing"
+  "https://docs.google.com/document/d/1G6cuGFNinP70hd8dBw8A-6BT85xF4_AP/edit?ouid=102434741372891028918&rtpof=true&sd=true"
