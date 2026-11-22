@@ -1,7 +1,7 @@
 "use client"
 
+import clsx from "clsx"
 import Link from "next/link.js"
-import { usePathname } from "next/navigation.js"
 import { useEffect, useRef } from "react"
 import { useEvent } from "react-use"
 
@@ -35,29 +35,13 @@ const LINKS: HeaderLinkProps[] = [
   },
 ]
 
-/**
- * Whether `href` points at the page currently being viewed.
- * "/" only matches exactly; other internal routes also match their sub-pages.
- */
-function isActiveHref(href: string, pathname: string | null) {
-  if (!pathname || !href.startsWith("/")) return false
-  if (href === "/") return pathname === "/"
-
-  return pathname === href || pathname.startsWith(`${href}/`)
-}
-
 function HeaderLink({ children, target, Icon, href = "#" }: HeaderLinkProps) {
-  const pathname = usePathname()
-  const isActive = isActiveHref(href, pathname)
-
   return (
     <Link
       href={href}
       target={target}
-      aria-current={isActive ? "page" : undefined}
-      className={classes(
+      className={clsx(
         "header_link flex items-center gap-1.5 border border-white bg-white px-1 py-1 text-primary hover:border-teal-500 hover:text-teal-500 md:px-2 md:py-1",
-        isActive && "header_link--active text-black",
       )}
     >
       <div className="header_inner-link flex items-center gap-1 text-base leading-none underline md:text-2xl">
